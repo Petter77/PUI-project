@@ -77,33 +77,9 @@ Projekt zespołowy realizowany w ramach przedmiotu PUI (Projektowanie Użytkowyc
         host: 'localhost',
         user: 'root',
         password: '',
-        database: 'nazwa_bazy'
+        database: 'fitate'
     });
     ```
-
+    
 ---
-
-## 🧑‍💻 Zespół
-
-- Imię Nazwisko – Frontend
-- Imię Nazwisko – Backend
-- Imię Nazwisko – Baza danych / Integracja
-*(Uzupełnij według składu zespołu)*
-
----
-
-## 📌 Uwagi
-
-- W razie problemów z `nodemon`, uruchom backend za pomocą `node index.js`
-- Porty domyślne:
-  - Backend: `http://localhost:3000`
-  - Frontend: `http://localhost:5173`
-
----
-
-## ✅ Status projektu
-
-✅ Backend podstawowy  
-✅ Frontend wstępny  
-🔄 W trakcie integracji...
 
