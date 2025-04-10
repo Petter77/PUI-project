@@ -68,18 +68,4 @@ Projekt zespołowy realizowany w ramach przedmiotu PUI (Projektowanie Użytkowyc
 
 ---
 
-## ⚙️ Konfiguracja bazy danych (MySQL)
-
-1. Utwórz bazę danych i tabelę zgodnie z wymaganiami projektu.
-2. Skonfiguruj dane dostępowe w pliku `backend/config.js` (jeśli taki istnieje, lub bezpośrednio w `index.js`):
-    ```js
-    const db = mysql.createConnection({
-        host: 'localhost',
-        user: 'root',
-        password: '',
-        database: 'fitate'
-    });
-    ```
-    
----
 
