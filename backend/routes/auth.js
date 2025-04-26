@@ -4,9 +4,11 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const checkUserExistence = require('../middlewares/auth/checkUserExistence');
 const db = require('../db');
+const checkToken = require('../middlewares/auth/checkToken')
 
 const SECRET_KEY = 'secret';
 
+// register user with form data
 router.post('/register', checkUserExistence(true), async (req, res) =>{
 
     const {
@@ -44,7 +46,7 @@ router.post('/register', checkUserExistence(true), async (req, res) =>{
 
 })
 
-// login user with checkIfusername middleware for check if username is busy or username exists in db
+// login user with checkUserExistence middleware for check if username is busy or username exists in db
 router.post('/login', checkUserExistence(false), async (req, res) =>{
     const hashedPassword = req.user.UserPassword;
     const {password} = req.body;
@@ -65,5 +67,11 @@ router.post('/login', checkUserExistence(false), async (req, res) =>{
 
     res.status(200).json(token);
 })
+
+// get all data about actual logged in user
+router.get('/logged', checkToken, (req, res) =>{
+    res.status(200).json(req.user.user);
+})
+
 
 module.exports = router;
