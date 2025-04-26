@@ -1,6 +1,6 @@
 const db = require('../../db');
 
-const checkIfUserName = (isLogin) => (req, res, next) =>{
+const checkUserExistence = (isLogin) => (req, res, next) =>{
     const {UserName, UserEmail} = req.body;
     if(!UserName) return res.status(400).json('Wypełnij wszystkie pola!');
     db.query('SELECT * FROM users WHERE UserName = ? OR UserEmail = ?', [UserName, UserEmail], (err, result) =>{
@@ -15,4 +15,4 @@ const checkIfUserName = (isLogin) => (req, res, next) =>{
     })
 }
 
-module.exports = checkIfUserName;
+module.exports = checkUserExistence;
