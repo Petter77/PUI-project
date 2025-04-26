@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
+import { Link } from 'react-router-dom';
 
 const Login = ({ setUserToken }) => {
   const [username, setUsername] = useState('');
@@ -72,6 +73,14 @@ const Login = ({ setUserToken }) => {
             </button>
           </div>
         </form>
+        <div className="mt-4 text-center">
+          <span className="text-sm text-gray-300">
+            Nie masz konta?{' '}
+            <Link to="/register" className="text-blue-500 hover:underline">
+              Zarejestruj się
+            </Link>
+          </span>
+        </div>
       </div>
     </div>
   );
