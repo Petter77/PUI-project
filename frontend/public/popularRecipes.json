@@ -1,0 +1,87 @@
+{
+  "offset": 0,
+  "number": 10,
+  "results": [
+    {
+      "id": 716429,
+      "title": "Pasta with Garlic, Scallions, Cauliflower & Breadcrumbs",
+      "image": "https://img.spoonacular.com/recipes/716429-312x231.jpg",
+      "imageType": "jpg",
+      "calories": 520,
+      "readyInMinutes": 30
+    },
+    {
+      "id": 715538,
+      "title": "Bruschetta Style Pork & Pasta",
+      "image": "https://img.spoonacular.com/recipes/715538-312x231.jpg",
+      "imageType": "jpg",
+      "calories": 610,
+      "readyInMinutes": 35
+    },
+    {
+      "id": 727348,
+      "title": "Spicy Chicken Tacos with Avocado Crema",
+      "image": "https://img.spoonacular.com/recipes/715495-312x231.jpg",
+      "imageType": "jpg",
+      "calories": 480,
+      "readyInMinutes": 25
+    },
+    {
+      "id": 703421,
+      "title": "Creamy Vegan Mushroom Risotto",
+      "image": "https://img.spoonacular.com/recipes/782601-312x231.jpg",
+      "imageType": "jpg",
+      "calories": 430,
+      "readyInMinutes": 40
+    },
+    {
+      "id": 731442,
+      "title": "Salmon with Lemon-Dill Sauce",
+      "image": "https://img.spoonacular.com/recipes/716627-312x231.jpg",
+      "imageType": "jpg",
+      "calories": 560,
+      "readyInMinutes": 28
+    },
+    {
+      "id": 741029,
+      "title": "Grilled Vegetable Panini",
+      "image": "https://img.spoonacular.com/recipes/782585-312x231.jpg",
+      "imageType": "jpg",
+      "calories": 370,
+      "readyInMinutes": 20
+    },
+    {
+      "id": 799388,
+      "title": "Quinoa Salad with Chickpeas & Feta",
+      "image": "https://img.spoonacular.com/recipes/794349-312x231.jpg",
+      "imageType": "jpg",
+      "calories": 440,
+      "readyInMinutes": 18
+    },
+    {
+      "id": 711203,
+      "title": "Thai Green Curry with Tofu",
+      "image": "https://img.spoonacular.com/recipes/794831-312x231.jpg",
+      "imageType": "jpg",
+      "calories": 510,
+      "readyInMinutes": 30
+    },
+    {
+      "id": 789101,
+      "title": "One-Pot Spaghetti Carbonara",
+      "image": "https://img.spoonacular.com/recipes/782600-312x231.jpg",
+      "imageType": "jpg",
+      "calories": 580,
+      "readyInMinutes": 22
+    },
+    {
+      "id": 768312,
+      "title": "Hearty Beef Stew with Carrots & Potatoes",
+      "image": "https://img.spoonacular.com/recipes/716426-312x231.jpg",
+      "imageType": "jpg",
+      "calories": 670,
+      "readyInMinutes": 45
+    }
+  ],
+  "totalResults": 86
+}

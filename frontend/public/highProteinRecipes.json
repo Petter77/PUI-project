@@ -1,0 +1,87 @@
+{
+  "offset": 10,
+  "number": 10,
+  "results": [
+    {
+      "id": 778812,
+      "title": "Zucchini Noodles with Pesto & Cherry Tomatoes",
+      "image": "https://img.spoonacular.com/recipes/632660-312x231.jpg",
+      "imageType": "jpg",
+      "calories": 350,
+      "readyInMinutes": 15
+    },
+    {
+      "id": 799910,
+      "title": "Honey Garlic Glazed Chicken Thighs",
+      "image": "https://img.spoonacular.com/recipes/716406-312x231.jpg",
+      "imageType": "jpg",
+      "calories": 600,
+      "readyInMinutes": 30
+    },
+    {
+      "id": 722100,
+      "title": "Shakshuka with Feta & Fresh Herbs",
+      "image": "https://img.spoonacular.com/recipes/664090-312x231.jpg",
+      "imageType": "jpg",
+      "calories": 410,
+      "readyInMinutes": 25
+    },
+    {
+      "id": 765332,
+      "title": "Butternut Squash Soup with Coconut Milk",
+      "image": "https://img.spoonacular.com/recipes/716627-312x231.jpg",
+      "imageType": "jpg",
+      "calories": 300,
+      "readyInMinutes": 35
+    },
+    {
+      "id": 711221,
+      "title": "Avocado Toast with Poached Egg",
+      "image": "https://img.spoonacular.com/recipes/659135-312x231.jpg",
+      "imageType": "jpg",
+      "calories": 320,
+      "readyInMinutes": 10
+    },
+    {
+      "id": 744531,
+      "title": "Loaded Sweet Potato Nachos",
+      "image": "https://img.spoonacular.com/recipes/650026-312x231.jpg",
+      "imageType": "jpg",
+      "calories": 470,
+      "readyInMinutes": 20
+    },
+    {
+      "id": 781203,
+      "title": "Crispy Tofu Stir-Fry with Veggies",
+      "image": "https://img.spoonacular.com/recipes/652015-312x231.jpg",
+      "imageType": "jpg",
+      "calories": 440,
+      "readyInMinutes": 25
+    },
+    {
+      "id": 720498,
+      "title": "Lentil Bolognese with Whole Wheat Pasta",
+      "image": "https://img.spoonacular.com/recipes/715540-312x231.jpg",
+      "imageType": "jpg",
+      "calories": 510,
+      "readyInMinutes": 30
+    },
+    {
+      "id": 731854,
+      "title": "BBQ Pulled Jackfruit Sandwich",
+      "image": "https://img.spoonacular.com/recipes/715422-312x231.jpg",
+      "imageType": "jpg",
+      "calories": 390,
+      "readyInMinutes": 20
+    },
+    {
+      "id": 792241,
+      "title": "Cajun Shrimp Tacos with Slaw",
+      "image": "https://img.spoonacular.com/recipes/715497-312x231.jpg",
+      "imageType": "jpg",
+      "calories": 520,
+      "readyInMinutes": 27
+    }
+  ],
+  "totalResults": 86
+}

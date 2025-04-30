@@ -1,0 +1,87 @@
+{
+  "offset": 30,
+  "number": 10,
+  "results": [
+    {
+      "id": 802101,
+      "title": "Zucchini Noodles with Pesto and Cherry Tomatoes",
+      "image": "https://img.spoonacular.com/recipes/802101-312x231.jpg",
+      "imageType": "jpg",
+      "calories": 350,
+      "readyInMinutes": 20
+    },
+    {
+      "id": 809232,
+      "title": "BBQ Pulled Jackfruit Sandwiches",
+      "image": "https://img.spoonacular.com/recipes/809232-312x231.jpg",
+      "imageType": "jpg",
+      "calories": 520,
+      "readyInMinutes": 30
+    },
+    {
+      "id": 813644,
+      "title": "Spaghetti Squash with Marinara and Mozzarella",
+      "image": "https://img.spoonacular.com/recipes/813644-312x231.jpg",
+      "imageType": "jpg",
+      "calories": 400,
+      "readyInMinutes": 35
+    },
+    {
+      "id": 821998,
+      "title": "Thai Peanut Chicken Stir-Fry",
+      "image": "https://img.spoonacular.com/recipes/821998-312x231.jpg",
+      "imageType": "jpg",
+      "calories": 550,
+      "readyInMinutes": 25
+    },
+    {
+      "id": 835221,
+      "title": "Butternut Squash & Sage Risotto",
+      "image": "https://img.spoonacular.com/recipes/835221-312x231.jpg",
+      "imageType": "jpg",
+      "calories": 480,
+      "readyInMinutes": 40
+    },
+    {
+      "id": 842004,
+      "title": "Honey Garlic Shrimp with Broccoli",
+      "image": "https://img.spoonacular.com/recipes/842004-312x231.jpg",
+      "imageType": "jpg",
+      "calories": 510,
+      "readyInMinutes": 22
+    },
+    {
+      "id": 850999,
+      "title": "Lentil Soup with Carrots and Celery",
+      "image": "https://img.spoonacular.com/recipes/850999-312x231.jpg",
+      "imageType": "jpg",
+      "calories": 390,
+      "readyInMinutes": 45
+    },
+    {
+      "id": 861110,
+      "title": "Baked Sweet Potato Tacos with Black Beans",
+      "image": "https://img.spoonacular.com/recipes/861110-312x231.jpg",
+      "imageType": "jpg",
+      "calories": 470,
+      "readyInMinutes": 30
+    },
+    {
+      "id": 874512,
+      "title": "Creamy Sun-Dried Tomato Pasta with Spinach",
+      "image": "https://img.spoonacular.com/recipes/874512-312x231.jpg",
+      "imageType": "jpg",
+      "calories": 560,
+      "readyInMinutes": 28
+    },
+    {
+      "id": 880321,
+      "title": "Avocado Toast with Poached Egg and Arugula",
+      "image": "https://img.spoonacular.com/recipes/880321-312x231.jpg",
+      "imageType": "jpg",
+      "calories": 430,
+      "readyInMinutes": 15
+    }
+  ],
+  "totalResults": 86
+}

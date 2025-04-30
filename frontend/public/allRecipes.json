@@ -1,0 +1,247 @@
+{
+  "offset": 0,
+  "number": 30,
+  "results": [
+    {
+      "id": 100001,
+      "title": "Creamy Garlic Parmesan Pasta",
+      "image": "https://img.spoonacular.com/recipes/100001-312x231.jpg",
+      "imageType": "jpg",
+      "calories": 560,
+      "readyInMinutes": 25
+    },
+    {
+      "id": 100002,
+      "title": "Thai Peanut Chicken Wraps",
+      "image": "https://img.spoonacular.com/recipes/100002-312x231.jpg",
+      "imageType": "jpg",
+      "calories": 520,
+      "readyInMinutes": 20
+    },
+    {
+      "id": 100003,
+      "title": "Spaghetti Squash with Marinara",
+      "image": "https://img.spoonacular.com/recipes/100003-312x231.jpg",
+      "imageType": "jpg",
+      "calories": 350,
+      "readyInMinutes": 30
+    },
+    {
+      "id": 100004,
+      "title": "Quinoa & Black Bean Burrito Bowl",
+      "image": "https://img.spoonacular.com/recipes/100004-312x231.jpg",
+      "imageType": "jpg",
+      "calories": 480,
+      "readyInMinutes": 25
+    },
+    {
+      "id": 100005,
+      "title": "Lemon Herb Grilled Salmon",
+      "image": "https://img.spoonacular.com/recipes/100005-312x231.jpg",
+      "imageType": "jpg",
+      "calories": 590,
+      "readyInMinutes": 20
+    },
+    {
+      "id": 100006,
+      "title": "One-Pan Chicken Fajitas",
+      "image": "https://img.spoonacular.com/recipes/100006-312x231.jpg",
+      "imageType": "jpg",
+      "calories": 510,
+      "readyInMinutes": 25
+    },
+    {
+      "id": 100007,
+      "title": "Coconut Curry Lentil Soup",
+      "image": "https://img.spoonacular.com/recipes/100007-312x231.jpg",
+      "imageType": "jpg",
+      "calories": 440,
+      "readyInMinutes": 30
+    },
+    {
+      "id": 100008,
+      "title": "Baked Pesto Stuffed Chicken",
+      "image": "https://img.spoonacular.com/recipes/100008-312x231.jpg",
+      "imageType": "jpg",
+      "calories": 550,
+      "readyInMinutes": 35
+    },
+    {
+      "id": 100009,
+      "title": "Vegetable Pad Thai",
+      "image": "https://img.spoonacular.com/recipes/100009-312x231.jpg",
+      "imageType": "jpg",
+      "calories": 490,
+      "readyInMinutes": 30
+    },
+    {
+      "id": 100010,
+      "title": "Creamy Tomato Basil Soup",
+      "image": "https://img.spoonacular.com/recipes/100010-312x231.jpg",
+      "imageType": "jpg",
+      "calories": 430,
+      "readyInMinutes": 20
+    },
+    {
+      "id": 100011,
+      "title": "Zesty Shrimp Tacos",
+      "image": "https://img.spoonacular.com/recipes/100011-312x231.jpg",
+      "imageType": "jpg",
+      "calories": 500,
+      "readyInMinutes": 18
+    },
+    {
+      "id": 100012,
+      "title": "Stuffed Sweet Potatoes with Black Beans",
+      "image": "https://img.spoonacular.com/recipes/100012-312x231.jpg",
+      "imageType": "jpg",
+      "calories": 470,
+      "readyInMinutes": 35
+    },
+    {
+      "id": 100013,
+      "title": "Spinach Mushroom Omelette",
+      "image": "https://img.spoonacular.com/recipes/100013-312x231.jpg",
+      "imageType": "jpg",
+      "calories": 390,
+      "readyInMinutes": 10
+    },
+    {
+      "id": 100014,
+      "title": "Buffalo Cauliflower Bites",
+      "image": "https://img.spoonacular.com/recipes/100014-312x231.jpg",
+      "imageType": "jpg",
+      "calories": 420,
+      "readyInMinutes": 25
+    },
+    {
+      "id": 100015,
+      "title": "Turkey and Spinach Stuffed Shells",
+      "image": "https://img.spoonacular.com/recipes/100015-312x231.jpg",
+      "imageType": "jpg",
+      "calories": 540,
+      "readyInMinutes": 40
+    },
+    {
+      "id": 100016,
+      "title": "Falafel Wrap with Garlic Sauce",
+      "image": "https://img.spoonacular.com/recipes/100016-312x231.jpg",
+      "imageType": "jpg",
+      "calories": 430,
+      "readyInMinutes": 20
+    },
+    {
+      "id": 100017,
+      "title": "Grilled Pineapple Chicken Skewers",
+      "image": "https://img.spoonacular.com/recipes/100017-312x231.jpg",
+      "imageType": "jpg",
+      "calories": 480,
+      "readyInMinutes": 30
+    },
+    {
+      "id": 100018,
+      "title": "Broccoli Cheddar Quiche",
+      "image": "https://img.spoonacular.com/recipes/100018-312x231.jpg",
+      "imageType": "jpg",
+      "calories": 510,
+      "readyInMinutes": 35
+    },
+    {
+      "id": 100019,
+      "title": "Soba Noodle Stir-Fry",
+      "image": "https://img.spoonacular.com/recipes/100019-312x231.jpg",
+      "imageType": "jpg",
+      "calories": 460,
+      "readyInMinutes": 22
+    },
+    {
+      "id": 100020,
+      "title": "Beef and Broccoli Bowls",
+      "image": "https://img.spoonacular.com/recipes/100020-312x231.jpg",
+      "imageType": "jpg",
+      "calories": 590,
+      "readyInMinutes": 30
+    },
+    {
+      "id": 100021,
+      "title": "Pasta Primavera",
+      "image": "https://img.spoonacular.com/recipes/100021-312x231.jpg",
+      "imageType": "jpg",
+      "calories": 520,
+      "readyInMinutes": 28
+    },
+    {
+      "id": 100022,
+      "title": "Barbecue Chicken Flatbread",
+      "image": "https://img.spoonacular.com/recipes/100022-312x231.jpg",
+      "imageType": "jpg",
+      "calories": 600,
+      "readyInMinutes": 15
+    },
+    {
+      "id": 100023,
+      "title": "Ratatouille with Fresh Herbs",
+      "image": "https://img.spoonacular.com/recipes/100023-312x231.jpg",
+      "imageType": "jpg",
+      "calories": 370,
+      "readyInMinutes": 40
+    },
+    {
+      "id": 100024,
+      "title": "Chicken Caesar Pasta Salad",
+      "image": "https://img.spoonacular.com/recipes/100024-312x231.jpg",
+      "imageType": "jpg",
+      "calories": 560,
+      "readyInMinutes": 20
+    },
+    {
+      "id": 100025,
+      "title": "Veggie Sushi Rolls",
+      "image": "https://img.spoonacular.com/recipes/100025-312x231.jpg",
+      "imageType": "jpg",
+      "calories": 400,
+      "readyInMinutes": 35
+    },
+    {
+      "id": 100026,
+      "title": "Garlic Butter Steak Bites",
+      "image": "https://img.spoonacular.com/recipes/100026-312x231.jpg",
+      "imageType": "jpg",
+      "calories": 580,
+      "readyInMinutes": 15
+    },
+    {
+      "id": 100027,
+      "title": "Tofu Banh Mi Sandwich",
+      "image": "https://img.spoonacular.com/recipes/100027-312x231.jpg",
+      "imageType": "jpg",
+      "calories": 470,
+      "readyInMinutes": 20
+    },
+    {
+      "id": 100028,
+      "title": "Creamy Mushroom Risotto",
+      "image": "https://img.spoonacular.com/recipes/100028-312x231.jpg",
+      "imageType": "jpg",
+      "calories": 490,
+      "readyInMinutes": 40
+    },
+    {
+      "id": 100029,
+      "title": "Sweet and Sour Tofu",
+      "image": "https://img.spoonacular.com/recipes/100029-312x231.jpg",
+      "imageType": "jpg",
+      "calories": 450,
+      "readyInMinutes": 25
+    },
+    {
+      "id": 100030,
+      "title": "Classic Tuna Salad Sandwich",
+      "image": "https://img.spoonacular.com/recipes/100030-312x231.jpg",
+      "imageType": "jpg",
+      "calories": 520,
+      "readyInMinutes": 10
+    }
+  ],
+  "totalResults": 86
+}

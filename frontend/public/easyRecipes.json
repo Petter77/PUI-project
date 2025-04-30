@@ -1,0 +1,87 @@
+{
+  "offset": 20,
+  "number": 10,
+  "results": [
+    {
+      "id": 783201,
+      "title": "Stuffed Bell Peppers with Rice and Cheese",
+      "image": "https://img.spoonacular.com/recipes/640941-312x231.jpg",
+      "imageType": "jpg",
+      "calories": 470,
+      "readyInMinutes": 35
+    },
+    {
+      "id": 776548,
+      "title": "Eggplant Parmesan Bake",
+      "image": "https://img.spoonacular.com/recipes/642129-312x231.jpg",
+      "imageType": "jpg",
+      "calories": 490,
+      "readyInMinutes": 40
+    },
+    {
+      "id": 790120,
+      "title": "Grilled Chicken Caesar Salad Wrap",
+      "image": "https://img.spoonacular.com/recipes/651195-312x231.jpg",
+      "imageType": "jpg",
+      "calories": 530,
+      "readyInMinutes": 20
+    },
+    {
+      "id": 728819,
+      "title": "Spinach & Ricotta Stuffed Shells",
+      "image": "https://img.spoonacular.com/recipes/636627-312x231.jpg",
+      "imageType": "jpg",
+      "calories": 460,
+      "readyInMinutes": 35
+    },
+    {
+      "id": 764431,
+      "title": "Teriyaki Glazed Salmon Bowl",
+      "image": "https://img.spoonacular.com/recipes/653138-312x231.jpg",
+      "imageType": "jpg",
+      "calories": 570,
+      "readyInMinutes": 25
+    },
+    {
+      "id": 711498,
+      "title": "Chickpea Curry with Basmati Rice",
+      "image": "https://img.spoonacular.com/recipes/656744-312x231.jpg",
+      "imageType": "jpg",
+      "calories": 510,
+      "readyInMinutes": 30
+    },
+    {
+      "id": 775600,
+      "title": "Vegetarian Chili with Cornbread Topping",
+      "image": "https://img.spoonacular.com/recipes/633404-312x231.jpg",
+      "imageType": "jpg",
+      "calories": 600,
+      "readyInMinutes": 45
+    },
+    {
+      "id": 768819,
+      "title": "Pesto Chicken & Veggie Skillet",
+      "image": "https://img.spoonacular.com/recipes/659134-312x231.jpg",
+      "imageType": "jpg",
+      "calories": 480,
+      "readyInMinutes": 30
+    },
+    {
+      "id": 785109,
+      "title": "Greek Orzo Salad with Feta & Olives",
+      "image": "https://img.spoonacular.com/recipes/660234-312x231.jpg",
+      "imageType": "jpg",
+      "calories": 420,
+      "readyInMinutes": 18
+    },
+    {
+      "id": 798301,
+      "title": "Chocolate Banana Protein Pancakes",
+      "image": "https://img.spoonacular.com/recipes/661304-312x231.jpg",
+      "imageType": "jpg",
+      "calories": 490,
+      "readyInMinutes": 20
+    }
+  ],
+  "totalResults": 86
+}
