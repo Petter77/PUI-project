@@ -14,6 +14,7 @@ function Dashboard() {
     const [buttonClicked, setButtonClicked] = useState(false);
 
     const recipesContainerRef = useRef(null);  // Ref for the recipes container
+    const scrollToTopRef = useRef(null); // Ref for the top of the page to scroll to
 
     const getPopularRecipes = async () => {
         await axios.get('/popularRecipes.json')
@@ -85,14 +86,17 @@ function Dashboard() {
 
     useEffect(() => {
         // Check if the ref exists before trying to scroll
-        if (buttonClicked && recipesContainerRef.current) {
-            console.log("Attempting to scroll to the recipes container...");
-            recipesContainerRef.current.scrollIntoView({ behavior: 'smooth' });
+        if (buttonClicked && scrollToTopRef.current) {
+            console.log("Attempting to scroll to the top...");
+            scrollToTopRef.current.scrollIntoView({ behavior: 'smooth' });
         }
     }, [buttonClicked]);  // Trigger scroll when buttonClicked changes
 
     return (
         <div>
+            {/* Ref for the scroll target */}
+            <div ref={scrollToTopRef}></div>
+
             {/* Conditionally render SearchInput only if the "Show All" button hasn't been clicked */}
             {!buttonClicked && <SearchInput setSearchResults={setSearchResults} />}
 
