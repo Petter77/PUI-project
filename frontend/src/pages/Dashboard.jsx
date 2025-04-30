@@ -13,6 +13,7 @@ function Dashboard() {
     const [message, setMessage] = useState(null);
     const [buttonClicked, setButtonClicked] = useState(false);
 
+
     const recipesContainerRef = useRef(null);  // Ref for the recipes container
     const scrollToTopRef = useRef(null); // Ref for the top of the page to scroll to
 

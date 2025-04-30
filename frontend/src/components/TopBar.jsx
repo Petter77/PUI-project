@@ -11,7 +11,7 @@ const TopBar = ({ userToken, setUserToken, user }) => {
   };
 
   return (
-    <header className="bg-[#1f1f23] text-white flex items-center justify-between px-6 py-4 shadow-md w-full">
+    <header className="bg-[#1f1f23] text-white flex items-center justify-between px-6 py-4 shadow-md w-full sticky top-0 z-50">
       <div className="flex items-center space-x-2 text-2xl font-bold tracking-wide">
         <UtensilsCrossed size={28} className="text-blue-500"/>
         <span className="text-blue-500">Fite ate</span>

@@ -5,8 +5,8 @@ const SideBar = ({ user }) => {
   const navigate = useNavigate();
 
   return (
-    <aside className="bg-[#1a1a1e] text-white w-48 flex flex-col py-6 space-y-4 shadow-md min-h-screen">
-      <button 
+<aside className="bg-[#1a1a1e] text-white w-64 flex flex-col py-6 space-y-4 shadow-md min-h-screen">
+<button 
         onClick={() => navigate('/')} 
         className="flex items-center space-x-4 px-4 py-2 hover:bg-[#2a2a2e] hover:text-blue-400 transition"
       >
