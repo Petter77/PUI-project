@@ -1,148 +1,150 @@
-import { useEffect, useState, useRef } from "react";
-import SearchInput from "../components/SearchInput";
-import SwiperRecipes from "../components/SwiperRecipes";
 import axios from "axios";
-import AllRecipes from "../components/allRecipes";
+import SearchInput from "../components/SearchInput";
+import { useEffect, useState } from "react";
+import RecipesSlider from "../components/RecipesSlider";
+import RecipesAll from "../components/RecipesAll";
+import RecipeFilter from "../components/RecipeFilter";
 
 function Dashboard() {
-    const [searchResults, setSearchResults] = useState(null);
-    const [popularRecipes, setPopularRecipes] = useState(null);
-    const [highProteinRecipes, setHighProteinRecipes] = useState(null);
-    const [easyRecipes, setEasyRecipes] = useState(null);
-    const [allRecipes, setAllRecipes] = useState(null);
-    const [message, setMessage] = useState(null);
-    const [buttonClicked, setButtonClicked] = useState(false);
+  const [popularRecipes, setPopularRecipes] = useState(null);
+  const [highProteinRecipes, setHighProteinRecipes] = useState(null);
+  const [easyRecipes, setEasyRecipes] = useState(null);
+  const [message, setMessage] = useState(null);
+  const [allRecipes, setAllRecipes] = useState(null);
+  const [filteredRecipes, setFilteredRecipes] = useState(null);
+  const [buttonClicked, setButtonClicked] = useState(null);
 
+  const getPopularRecipes = async () => {
+    await axios
+      .get("/popularRecipes.json")
+      .then((response) => {
+        setPopularRecipes(response.data.results);
+      })
+      .catch((error) => {
+        console.error("Error loading recipes:", error);
+        setMessage("Error loading recipes");
+      });
+  };
 
-    const recipesContainerRef = useRef(null);  // Ref for the recipes container
-    const scrollToTopRef = useRef(null); // Ref for the top of the page to scroll to
+  const getHighProteinRecipes = async () => {
+    await axios
+      .get("/highProteinRecipes.json")
+      .then((response) => {
+        setHighProteinRecipes(response.data.results);
+      })
+      .catch((error) => {
+        setMessage("Error loading recipes");
+      });
+  };
 
-    const getPopularRecipes = async () => {
-        await axios.get('/popularRecipes.json')
-            .then(response => {
-                setPopularRecipes(response.data.results);
-            })
-            .catch(error => {
-                console.error('Error loading recipes:', error);
-                setMessage('Error loading recipes:', error);
-            });
-    };
+  const getEasyRecipes = async () => {
+    await axios
+      .get("/easyRecipes.json")
+      .then((response) => {
+        setEasyRecipes(response.data.results);
+      })
+      .catch((error) => {
+        console.error("Error loading recipes:", error);
+        setMessage("Error loading recipes");
+      });
+  };
 
-    const getHighProteinRecipes = async () => {
-        await axios.get('/highProteinRecipes.json')
-            .then(response => {
-                setHighProteinRecipes(response.data.results);
-            })
-            .catch(error => {
-                setMessage('Error loading recipes:', error);
-            });
-    };
+  const getAllRecipes = async () => {
+    await axios
+      .get("/allRecipes.json")
+      .then((response) => {
+        setAllRecipes(response.data);
+      })
+      .catch((error) => {
+        console.error("Error loading recipes:", error);
+        setMessage("Error loading recipes");
+      });
+  };
 
-    const getEasyRecipes = async () => {
-        await axios.get('/easyRecipes.json')
-            .then(response => {
-                setEasyRecipes(response.data.results);
-            })
-            .catch(error => {
-                console.error('Error loading recipes:', error);
-                setMessage('Error loading recipes:', error);
-            });
-    };
+  const getFilteredRecipes = async () => {
+    let fetchUrl = null;
 
-    const getAllRecipesForCategory = async (category) => {
-        let url = null;
-        switch (category) {
-            case 'Popular recipes':
-                url = '/allPopularRecipes.json';
-                break;
-            case 'High protein recipes':
-                url = '/allHighProteinRecipes.json';
-                break;
-            case 'Quick and easy recipes':
-                url = '/allEasyRecipes.json';
-                break;
-            case 'all':
-                url = '/allRecipes.json';
-                break;
-            default:
-                return;
-        }
+    switch (buttonClicked) {
+      case "Popular recipes":
+        fetchUrl = "allPopularRecipes.json";
+        break;
+      case "High protein recipes":
+        fetchUrl = "allHighProteinRecipes.json";
+        break;
+      case "Easy recipes":
+        fetchUrl = "allEasyRecipes.json";
+        break;
+      default:
+        return;
+    }
 
-        await axios.get(url)
-            .then(response => {
-                setAllRecipes(response.data.results);
-                setButtonClicked(true); // Set buttonClicked to true after the recipes are fetched
-            })
-            .catch(error => {
-                console.error('Error loading recipes:', error);
-                setMessage('Error loading recipes:', error);
-            });
-    };
+    try {
+      const response = await axios.get(fetchUrl);
+      setFilteredRecipes(response.data.results);
+      setMessage(null);
+    } catch (error) {
+      console.error("Error loading recipes:", error);
+      setMessage("Error loading recipes");
+    }
+  };
 
-    useEffect(() => {
-        getPopularRecipes();
-        getHighProteinRecipes();
-        getEasyRecipes();
-    }, []);
+  useEffect(() => {
+    getPopularRecipes();
+    getHighProteinRecipes();
+    getEasyRecipes();
+    getAllRecipes();
+  }, []);
 
-    useEffect(() => {
-        // Check if the ref exists before trying to scroll
-        if (buttonClicked && scrollToTopRef.current) {
-            console.log("Attempting to scroll to the top...");
-            scrollToTopRef.current.scrollIntoView({ behavior: 'smooth' });
-        }
-    }, [buttonClicked]);  // Trigger scroll when buttonClicked changes
+  useEffect(() => {
+    if (buttonClicked) {
+      getFilteredRecipes();
+    }
+  }, [buttonClicked]);
 
-    return (
-        <div>
-            {/* Ref for the scroll target */}
-            <div ref={scrollToTopRef}></div>
-
-            {/* Conditionally render SearchInput only if the "Show All" button hasn't been clicked */}
-            {!buttonClicked && <SearchInput setSearchResults={setSearchResults} />}
-
-            {(allRecipes && buttonClicked) ? (
-                <AllRecipes
-                    buttonClicked={buttonClicked}
-                    setButtonClicked={setButtonClicked}
-                    results={allRecipes}
-                    message={message}
-                />
-            ) : (
-                <div key={buttonClicked ? 'showAllClicked' : 'initial'} ref={recipesContainerRef}>
-                    <SwiperRecipes
-                        title="Popular recipes"
-                        results={popularRecipes}
-                        message={message}
-                        setButtonClicked={setButtonClicked}
-                        getAllRecipesForCategory={getAllRecipesForCategory}
-                    />
-                    <SwiperRecipes
-                        title="High protein recipes"
-                        results={highProteinRecipes}
-                        message={message}
-                        setButtonClicked={setButtonClicked}
-                        getAllRecipesForCategory={getAllRecipesForCategory}
-                    />
-                    <SwiperRecipes
-                        title="Quick and easy recipes"
-                        results={easyRecipes}
-                        message={message}
-                        setButtonClicked={setButtonClicked}
-                        getAllRecipesForCategory={getAllRecipesForCategory}
-                    />
-                    
-                    {/* Centered and wider Show All button */}
-                    <button
-                        onClick={() => getAllRecipesForCategory('all')}
-                        className="mt-8 py-3 px-12 bg-blue-500 text-white font-semibold rounded-lg shadow-lg hover:bg-blue-600 transition-colors mx-auto block w-64"
-                    >
-                        Show all
-                    </button>
-                </div>
-            )}
-        </div>
-    );
+  return (
+    <>
+      {(!buttonClicked || !filteredRecipes) ? (
+        <>
+          <SearchInput />
+          <RecipeFilter setButtonClicked={setButtonClicked} title="Popular filters"/>
+          <RecipesSlider
+            title="Popular recipes"
+            results={popularRecipes}
+            message={message}
+            setButtonClicked={setButtonClicked}
+          />
+          <RecipesSlider
+            title="High protein recipes"
+            results={highProteinRecipes}
+            message={message}
+            setButtonClicked={setButtonClicked}
+          />
+          <RecipesSlider
+            title="Easy recipes"
+            results={easyRecipes}
+            message={message}
+            setButtonClicked={setButtonClicked}
+          />
+          <RecipesAll allRecipes={allRecipes} title="All recipes" message={message} />
+        </>
+      ) : (
+        <>
+          <div className="flex justify-end mb-4">
+            <button
+              onClick={() => {
+                setButtonClicked(null);
+                setFilteredRecipes(null);
+              }}
+              className="bg-green-500 text-white py-2 px-6 rounded-md text-lg hover:bg-green-600 transition duration-300"
+            >
+              Go Back
+            </button>
+          </div>
+          <RecipesAll allRecipes={filteredRecipes} title={buttonClicked} message={message} />
+        </>
+      )}
+    </>
+  );
 }
 
 export default Dashboard;

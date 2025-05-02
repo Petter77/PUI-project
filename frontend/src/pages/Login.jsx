@@ -33,8 +33,8 @@ const Login = ({ setUserToken }) => {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-[#121216] text-white">
-      <div className="bg-[#1f1f23] p-8 rounded-xl shadow-md w-full max-w-md">
+    <div className="flex justify-center items-center min-h-screen bg-gray-100 text-black">
+      <div className="bg-white p-8 rounded-xl shadow-md w-full max-w-md">
         <h2 className="text-3xl font-bold mb-6 text-center">Logowanie</h2>
         <form onSubmit={handleLogin} className="space-y-6">
           <div>
@@ -44,7 +44,7 @@ const Login = ({ setUserToken }) => {
               id="username"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
-              className="w-full p-3 rounded-lg bg-[#2c2c32] text-white focus:outline-none focus:ring-2 focus:ring-blue-600"
+              className="w-full p-3 rounded-lg bg-gray-200 text-black focus:outline-none focus:ring-2 focus:ring-blue-600"
               required
             />
           </div>
@@ -55,28 +55,28 @@ const Login = ({ setUserToken }) => {
               id="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full p-3 rounded-lg bg-[#2c2c32] text-white focus:outline-none focus:ring-2 focus:ring-blue-600"
+              className="w-full p-3 rounded-lg bg-gray-200 text-black focus:outline-none focus:ring-2 focus:ring-blue-600"
               required
             />
           </div>
           {errorMessage && (
-            <div className="bg-red-500 text-white text-sm p-3 rounded-lg">
+            <div className="bg-red-100 text-red-600 text-sm p-3 rounded-lg">
               {errorMessage}
             </div>
           )}
           <div>
             <button
               type="submit"
-              className="w-full bg-blue-600 hover:bg-blue-700 transition-all duration-200 py-3 rounded-lg font-semibold"
+              className="w-full bg-blue-600 hover:bg-blue-700 transition-all duration-200 py-3 rounded-lg font-semibold text-white"
             >
               Zaloguj się
             </button>
           </div>
         </form>
         <div className="mt-4 text-center">
-          <span className="text-sm text-gray-300">
+          <span className="text-sm text-gray-600">
             Nie masz konta?{' '}
-            <Link to="/register" className="text-blue-500 hover:underline">
+            <Link to="/register" className="text-blue-600 hover:underline">
               Zarejestruj się
             </Link>
           </span>
