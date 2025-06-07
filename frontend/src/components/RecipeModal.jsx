@@ -2,12 +2,13 @@ import { useState, useEffect } from "react";
 import { Heart, HeartOff, X } from "lucide-react";
 import axios from "axios";
 
-const RecipeModal = ({ recipeID, closeModal }) => {
+const RecipeModal = ({ recipeID, closeModal, source = "api", savedRecipe = null }) => {
   const [recipe, setRecipe] = useState(null);
   const [loading, setLoading] = useState(true);
   const [isFavorite, setIsFavorite] = useState(false);
   const [favLoading, setFavLoading] = useState(false);
-  const [user, setUser] = useState(null);
+
+  const token = sessionStorage.getItem("user");
 
   const API_HEADERS = {
     headers: {
@@ -16,34 +17,24 @@ const RecipeModal = ({ recipeID, closeModal }) => {
     },
   };
 
-  const token = sessionStorage.getItem("user");
-
-  const getLoggedUser = async () => {
-    try {
-      const response = await axios.get("http://localhost:3000/auth/logged", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      setUser(response.data);
-    } catch (error) {
-      console.error("❌ Błąd pobierania danych użytkownika:", error);
-      setUser(null);
-    }
-  };
-
   const getDetailsRecipe = async () => {
+    setLoading(true);
     try {
-      setLoading(true);
-      const response = await fetch(
-        `https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/${recipeID}/information`,
-        API_HEADERS
-      );
-      if (!response.ok) throw new Error("Failed to fetch recipe details");
-      const data = await response.json();
-      setRecipe(data);
+      if (source === "saved" && savedRecipe) {
+        // Dane są już w propsie, więc nie fetchujemy
+        setRecipe(savedRecipe);
+      } else {
+        // Fetch z API 
+        const response = await fetch(
+          `https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/${recipeID}/information`,
+          API_HEADERS
+        );
+        if (!response.ok) throw new Error("Failed to fetch recipe details");
+        const data = await response.json();
+        setRecipe(data);
+      }
     } catch (error) {
-      console.error("❌ Błąd pobierania przepisu:", error);
+      console.error("Błąd pobierania przepisu:", error);
     } finally {
       setLoading(false);
     }
@@ -61,24 +52,28 @@ const RecipeModal = ({ recipeID, closeModal }) => {
       );
       setIsFavorite(response.data.isFavorite);
     } catch (error) {
-      console.error("❌ Błąd sprawdzania ulubionych:", error);
+      console.error("Błąd sprawdzania ulubionych:", error);
     }
   };
 
   const saveRecipe = async () => {
+    if (!recipe) return;
     const recipeData = {
-      recipeId: recipe.id,
+      recipeId: recipe.id || recipe.ApiRecipeID,
       title: recipe.title,
-      instructions: recipe.instructions || "",
-      calories: recipe.calories, // może być undefined
-      prepTime: recipe.readyInMinutes,
-      servings: recipe.servings,
+      instructions: recipe.instructions || recipe.instruction || "",
+      calories: recipe.calories ?? null,
+      prepTime: recipe.readyInMinutes ?? recipe.prepTime ?? null,
+      servings: recipe.servings ?? null,
       image: recipe.image,
-      healthScore: recipe.healthScore,
-      ingredients: recipe.extendedIngredients.map((ing) => ({
-        name: ing.name,
-        amount: `${ing.amount} ${ing.unit}`.trim(),
-      })),
+      healthScore: recipe.healthScore ?? null,
+      ingredients:
+        (recipe.extendedIngredients
+          ? recipe.extendedIngredients.map((ing) => ({
+              name: ing.name,
+              amount: `${ing.amount} ${ing.unit}`.trim(),
+            }))
+          : recipe.ingredients) || [],
     };
 
     try {
@@ -92,9 +87,9 @@ const RecipeModal = ({ recipeID, closeModal }) => {
           },
         }
       );
-      console.log("✅ Dodano do ulubionych:", response.data.message);
+      console.log("Dodano do ulubionych:", response.data.message);
     } catch (error) {
-      console.error("❌ Błąd dodawania:", error.response?.data || error.message);
+      console.error("Błąd dodawania:", error.response?.data || error.message);
     }
   };
 
@@ -108,9 +103,9 @@ const RecipeModal = ({ recipeID, closeModal }) => {
           },
         }
       );
-      console.log("🗑️ Usunięto z ulubionych:", response.data.message);
+      console.log("Usunięto z ulubionych:", response.data.message);
     } catch (error) {
-      console.error("❌ Błąd usuwania:", error.response?.data || error.message);
+      console.error("Błąd usuwania:", error.response?.data || error.message);
     }
   };
 
@@ -125,7 +120,7 @@ const RecipeModal = ({ recipeID, closeModal }) => {
         setIsFavorite(true);
       }
     } catch (error) {
-      console.error("❌ toggleFavorite error:", error);
+      console.error("toggleFavorite error:", error);
     } finally {
       setFavLoading(false);
     }
@@ -150,10 +145,6 @@ const RecipeModal = ({ recipeID, closeModal }) => {
     }
   }, [recipeID]);
 
-  useEffect(() => {
-    getLoggedUser();
-  }, []);
-
   if (loading) {
     return (
       <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center px-4">
@@ -164,9 +155,10 @@ const RecipeModal = ({ recipeID, closeModal }) => {
 
   if (!recipe) return null;
 
-  const prepTime = recipe.readyInMinutes || "N/A";
-  const servings = recipe.servings || "N/A";
-  const ingredients = recipe.extendedIngredients || [];
+  const ingredients =
+    source === "saved"
+      ? recipe.ingredients || []
+      : recipe.extendedIngredients || [];
 
   return (
     <div
@@ -196,47 +188,65 @@ const RecipeModal = ({ recipeID, closeModal }) => {
 
         <div className="text-sm text-gray-600 mb-4 flex flex-col sm:flex-row gap-4">
           <p>
-            <strong>Prep time:</strong> {prepTime} minutes
+            <strong>Prep time:</strong>{" "}
+            {recipe.readyInMinutes ?? recipe.prepTime ?? "N/A"} minutes
           </p>
           <p>
-            <strong>Servings:</strong> {servings}
+            <strong>Servings:</strong> {recipe.servings ?? "N/A"}
           </p>
           <p>
-            <strong>Health Score:</strong> {recipe.healthScore || "N/A"}
+            <strong>Health Score:</strong> {recipe.healthScore ?? "N/A"}
           </p>
         </div>
 
         <div className="mb-4">
           <h3 className="font-semibold text-lg mb-2">Ingredients:</h3>
           <ul className="list-disc list-inside text-gray-700">
-            {ingredients.map((ing) => (
-              <li key={ing.id}>
-                {ing.original || `${ing.amount} ${ing.unit} ${ing.name}`}
+            {ingredients.map((ing, idx) => (
+              <li key={ing.id || idx}>
+                {ing.name}{" "}
+                {ing.amount
+                  ? `- ${ing.amount}`
+                  : ing.measures
+                  ? `- ${ing.measures.metric.amount} ${ing.measures.metric.unitShort}`
+                  : ""}
               </li>
             ))}
           </ul>
         </div>
 
-        <div className="text-gray-700 text-base leading-relaxed whitespace-pre-line select-text">
+        <div className="mb-4">
           <h3 className="font-semibold text-lg mb-2">Instructions:</h3>
           <p
-            dangerouslySetInnerHTML={{
-              __html: recipe.instructions || "No instructions available.",
-            }}
+            className="text-gray-700 whitespace-pre-wrap"
+            dangerouslySetInnerHTML={{ __html: recipe.instructions || "Brak instrukcji" }}
           />
         </div>
 
-        <button
+        {source !== "saved" && (
+                  <button
           disabled={favLoading}
           onClick={toggleFavorite}
-          className={`absolute bottom-4 right-4 text-white p-3 rounded-full ${
+          className={`w-full py-2 rounded-lg font-semibold ${
             isFavorite
-              ? "bg-red-500 hover:bg-red-600"
-              : "bg-blue-500 hover:bg-blue-600"
-          }`}
+              ? "bg-gray-300 hover:bg-gray-400 text-gray-700"
+              : "bg-red-500  hover:bg-red-600 text-white"
+          } transition-colors duration-300`}
         >
-          {isFavorite ? <Heart fill="currentColor" /> : <HeartOff />}
+          {isFavorite ? (
+            <div className="flex items-center justify-center gap-2">
+              <HeartOff size={20} />
+              Usuń z ulubionych
+            </div>
+          ) : (
+            <div className="flex items-center justify-center gap-2">
+              <Heart size={20} />
+              Dodaj do ulubionych
+            </div>
+          )}
         </button>
+        )}
+
       </div>
     </div>
   );

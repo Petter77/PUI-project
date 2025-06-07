@@ -1,31 +1,50 @@
 import { useState, useEffect } from "react";
-import RecipeModal from "./RecipeModal"; // importujemy komponent modalu
+import RecipeModal from "./RecipeModal";
 
-function RecipeCard({ recipe }) {
+function RecipeCard({ recipe, source = "api", onDelete }) {
   const [isCardClicked, setIsCardClicked] = useState(false);
 
-  // Funkcja do zamykania modalu
   const closeModal = () => {
     setIsCardClicked(false);
   };
 
-  // Blokowanie przewijania strony, gdy modal jest otwarty
   useEffect(() => {
-    if (isCardClicked) {
-      document.body.style.overflow = "hidden"; // blokujemy przewijanie
-    } else {
-      document.body.style.overflow = "auto"; // przywracamy przewijanie
-    }
+    document.body.style.overflow = isCardClicked ? "hidden" : "auto";
   }, [isCardClicked]);
+
+  const handleDeleteClick = (e) => {
+    e.stopPropagation(); // zapobiega otwarciu modala
+    if (onDelete) {
+      onDelete(recipe.ApiRecipeID);
+    }
+  };
 
   return (
     <>
-      {/* Karta przepisu */}
       <div
-        key={recipe.id}
-        className="keen-slider__slide flex justify-center"
+        key={recipe.id || recipe.ApiRecipeID}
+        className="keen-slider__slide flex justify-center cursor-pointer relative"
         onClick={() => setIsCardClicked(true)}
       >
+        {source === "saved" && (
+          <button
+            onClick={handleDeleteClick}
+            className="absolute top-2 left-2 z-10 bg-white rounded-full p-1 shadow hover:bg-red-100"
+            aria-label="Usuń przepis"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="w-5 h-5 text-red-600"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth={2}
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        )}
+
         <div className="w-full max-w-[14rem] sm:max-w-[15rem] md:max-w-[16rem] h-[14rem] sm:h-[16rem] md:h-[18rem] bg-white rounded-xl shadow-md flex flex-col items-center hover:scale-105 transition-transform duration-300">
           <img
             src={recipe.image}
@@ -35,20 +54,16 @@ function RecipeCard({ recipe }) {
           <h2 className="text-lg font-bold text-black text-left px-2 py-1 mb-2 line-clamp-2">
             {recipe.title}
           </h2>
-          <div className="flex justify-between w-full mt-auto">
-            <p className="text-base text-gray-600 ml-2 mb-1">
-              Calories: {recipe.calories}
-            </p>
-            <p className="text-base text-gray-600 mr-2 mb-1 text-right">
-              Time: {recipe.readyInMinutes} minutes
-            </p>
-          </div>
         </div>
       </div>
 
-      {/* Modal po kliknięciu w kartę */}
       {isCardClicked && (
-        <RecipeModal recipeID={recipe.id} closeModal={closeModal} />
+        <RecipeModal
+          recipeID={recipe.id || recipe.ApiRecipeID}
+          closeModal={closeModal}
+          source={source}
+          savedRecipe={source === "saved" ? recipe : null}
+        />
       )}
     </>
   );
