@@ -106,6 +106,7 @@ const Register = () => {
             <option value="">Wybierz płeć</option>
             <option value="Male">Mężczyzna</option>
             <option value="Female">Kobieta</option>
+
           </select>
 
           {errorMessage && (

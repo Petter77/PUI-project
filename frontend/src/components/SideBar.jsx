@@ -91,4 +91,3 @@ const SideBar = ({ user, isOpen, setUserToken }) => {
 };
 
 export default SideBar;
-

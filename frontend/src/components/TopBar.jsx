@@ -50,4 +50,3 @@ const TopBar = ({ userToken, user, toggleSidebar }) => {
 };
 
 export default TopBar;
-

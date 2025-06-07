@@ -12,11 +12,11 @@
   ];
 
   return (
-   <div className="px-4 mb-20">
+     <div className="w-full max-w-screen-xl mx-auto px-4 relative mb-20">
     <h1 className="text-2xl font-extrabold text-left text-black">{title}</h1>
 
     <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-2 mt-6">
-     {categories.map((category) => (
+         {categories.map((category) => (
       <button
        key={category}
        onClick={() => handleButtonClick(category)}
