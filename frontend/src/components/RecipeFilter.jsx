@@ -1,4 +1,3 @@
-// RecipeFilter component (no changes needed here, it correctly sets buttonClicked)
  const RecipeFilter = ({ setButtonClicked, title, activeFilter }) => {
   const handleButtonClick = (category) => {
    setButtonClicked(category);
