@@ -1,11 +1,20 @@
 // RecipesAll.jsx
 import React from 'react';
 import RecipeCard from './RecipeCard';
+import RecipeSkeletonCard from './RecipeSkeletonCard';
 
 function RecipesAll({ allRecipes, title, currentPage, totalResults, resultsPerPage, onPageChange, showLoadMoreButton = false }) {
-  // Komunikat ładowania tylko dla tej sekcji
   if (!allRecipes) {
-    return <p className="text-center mt-4">Ładowanie przepisów {title.toLowerCase()}...</p>;
+    return (
+      <section className="w-full max-w-screen-xl mx-auto px-4 py-8">
+        <h1 className="text-2xl font-extrabold text-left text-black mb-6">{title}</h1>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          {Array.from({ length: 8 }).map((_, index) => (
+            <RecipeSkeletonCard key={index} />
+          ))}
+        </div>
+      </section>
+    );
   }
 
   if (allRecipes.length === 0 && totalResults === 0) {
@@ -13,7 +22,6 @@ function RecipesAll({ allRecipes, title, currentPage, totalResults, resultsPerPa
   }
 
   const totalPages = Math.ceil(totalResults / resultsPerPage);
-  // Sprawdź, czy są jeszcze przepisy do załadowania, ale tylko jeśli totalResults jest znane
   const hasMoreRecipes = totalResults > 0 && allRecipes.length < totalResults;
 
   return (
@@ -30,7 +38,7 @@ function RecipesAll({ allRecipes, title, currentPage, totalResults, resultsPerPa
         hasMoreRecipes && (
           <div className="flex justify-center mt-12">
             <button
-              onClick={onPageChange} // onPageChange już zwiększa stronę
+              onClick={onPageChange}
               className="bg-blue-500 text-white py-2 px-6 rounded-md text-lg hover:bg-blue-600 transition duration-300"
             >
               Pokaż więcej
@@ -107,3 +115,4 @@ function RecipesAll({ allRecipes, title, currentPage, totalResults, resultsPerPa
 }
 
 export default RecipesAll;
+

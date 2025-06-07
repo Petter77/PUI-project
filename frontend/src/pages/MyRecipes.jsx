@@ -1,7 +1,8 @@
-
+// MyRecipes.jsx
 import { useState, useEffect } from "react";
 import axios from "axios";
 import RecipeCard from "../components/RecipeCard";
+import RecipeSkeletonCard from "../components/RecipeSkeletonCard"; // <== nowy import
 
 const MyRecipes = () => {
   const [user, setUser] = useState(null);
@@ -55,21 +56,30 @@ const MyRecipes = () => {
   }, [user]);
 
   const handleDeleteRecipe = async (recipeId) => {
-    console.log(recipeId)
     try {
       await axios.delete(`http://localhost:3000/recipes/delete/${recipeId}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
-      // Usuń przepis z lokalnego stanu
-      setSavedRecipes((prev) => prev.filter((r) => r.ApiRecipeID !== recipeId));
+      setSavedRecipes((prev) =>
+        prev.filter((r) => r.ApiRecipeID !== recipeId)
+      );
     } catch (error) {
       console.error("Błąd usuwania przepisu:", error);
     }
   };
 
-  if (loading) return <p>Ładowanie...</p>;
+  if (loading) {
+    return (
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-4">
+        {Array.from({ length: 8 }).map((_, index) => (
+          <RecipeSkeletonCard key={index} />
+        ))}
+      </div>
+    );
+  }
 
-  if (!savedRecipes.length) return <p>Brak zapisanych przepisów</p>;
+  if (!savedRecipes.length)
+    return <p className="text-center mt-4">Brak zapisanych przepisów</p>;
 
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-4">
@@ -87,3 +97,4 @@ const MyRecipes = () => {
 };
 
 export default MyRecipes;
+

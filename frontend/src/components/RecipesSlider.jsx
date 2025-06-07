@@ -2,7 +2,7 @@ import React from 'react';
  import 'keen-slider/keen-slider.min.css';
  import { useKeenSlider } from 'keen-slider/react';
  import RecipeCard from './RecipeCard';
-
+import SkeletonCard from './SkeletonCard';
  function RecipesSlider({ title, results, message, setButtonClicked}) {
   const [sliderRef] = useKeenSlider({
    loop: true,
@@ -22,8 +22,20 @@ import React from 'react';
     }
    },
   });
-
-  if (!results) return <p>Ładowanie...</p>;
+if (!results) {
+  return (
+    <section className="w-full max-w-screen-xl mx-auto px-4 relative mb-20">
+      <div className="flex items-center justify-between mb-4">
+        <h1 className="text-2xl font-extrabold text-left text-black">{title}</h1>
+      </div>
+      <div className="keen-slider overflow-hidden">
+        {Array.from({ length: 4 }).map((_, idx) => (
+          <SkeletonCard key={idx} />
+        ))}
+      </div>
+    </section>
+  );
+}
   if (message) return <p>{message}</p>;
 
   return (
