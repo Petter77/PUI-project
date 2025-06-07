@@ -1,0 +1,87 @@
+{
+  "offset": 40,
+  "number": 10,
+  "results": [
+    {
+      "id": 888122,
+      "title": "Spicy Chickpea Buddha Bowl",
+      "image": "https://img.spoonacular.com/recipes/888122-312x231.jpg",
+      "imageType": "jpg",
+      "calories": 450,
+      "readyInMinutes": 25
+    },
+    {
+      "id": 893401,
+      "title": "Garlic Butter Tilapia with Steamed Vegetables",
+      "image": "https://img.spoonacular.com/recipes/893401-312x231.jpg",
+      "imageType": "jpg",
+      "calories": 480,
+      "readyInMinutes": 20
+    },
+    {
+      "id": 899200,
+      "title": "Vegan Mushroom Stroganoff",
+      "image": "https://img.spoonacular.com/recipes/899200-312x231.jpg",
+      "imageType": "jpg",
+      "calories": 430,
+      "readyInMinutes": 30
+    },
+    {
+      "id": 906342,
+      "title": "Grilled Veggie & Hummus Wrap",
+      "image": "https://img.spoonacular.com/recipes/906342-312x231.jpg",
+      "imageType": "jpg",
+      "calories": 400,
+      "readyInMinutes": 15
+    },
+    {
+      "id": 911879,
+      "title": "Creamy Broccoli & Quinoa Casserole",
+      "image": "https://img.spoonacular.com/recipes/911879-312x231.jpg",
+      "imageType": "jpg",
+      "calories": 500,
+      "readyInMinutes": 35
+    },
+    {
+      "id": 918331,
+      "title": "Baked Falafel with Tahini Sauce",
+      "image": "https://img.spoonacular.com/recipes/918331-312x231.jpg",
+      "imageType": "jpg",
+      "calories": 370,
+      "readyInMinutes": 28
+    },
+    {
+      "id": 923845,
+      "title": "Tomato Basil Gnocchi Skillet",
+      "image": "https://img.spoonacular.com/recipes/923845-312x231.jpg",
+      "imageType": "jpg",
+      "calories": 520,
+      "readyInMinutes": 18
+    },
+    {
+      "id": 931211,
+      "title": "Stuffed Portobello Mushrooms",
+      "image": "https://img.spoonacular.com/recipes/931211-312x231.jpg",
+      "imageType": "jpg",
+      "calories": 460,
+      "readyInMinutes": 35
+    },
+    {
+      "id": 939820,
+      "title": "Asian Chicken Lettuce Wraps",
+      "image": "https://img.spoonacular.com/recipes/939820-312x231.jpg",
+      "imageType": "jpg",
+      "calories": 430,
+      "readyInMinutes": 22
+    },
+    {
+      "id": 947012,
+      "title": "Roasted Cauliflower Tacos with Lime Crema",
+      "image": "https://img.spoonacular.com/recipes/947012-312x231.jpg",
+      "imageType": "jpg",
+      "calories": 390,
+      "readyInMinutes": 25
+    }
+  ],
+  "totalResults": 86
+}

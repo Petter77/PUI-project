@@ -1,0 +1,352 @@
+[
+  {
+    "id": 100031,
+    "title": "Grilled Veggie Tacos",
+    "image": "https://img.spoonacular.com/recipes/100031-312x231.jpg",
+    "calories": 430,
+    "readyInMinutes": 25
+  },
+  {
+    "id": 100032,
+    "title": "Eggplant Parmesan",
+    "image": "https://img.spoonacular.com/recipes/100032-312x231.jpg",
+    "calories": 480,
+    "readyInMinutes": 35
+  },
+  {
+    "id": 100033,
+    "title": "Mediterranean Chickpea Salad",
+    "image": "https://img.spoonacular.com/recipes/100033-312x231.jpg",
+    "calories": 400,
+    "readyInMinutes": 20
+  },
+  {
+    "id": 100034,
+    "title": "Shrimp Scampi with Zoodles",
+    "image": "https://img.spoonacular.com/recipes/100034-312x231.jpg",
+    "calories": 350,
+    "readyInMinutes": 18
+  },
+  {
+    "id": 100035,
+    "title": "Stuffed Bell Peppers",
+    "image": "https://img.spoonacular.com/recipes/100035-312x231.jpg",
+    "calories": 510,
+    "readyInMinutes": 40
+  },
+  {
+    "id": 100036,
+    "title": "Avocado Chicken Salad",
+    "image": "https://img.spoonacular.com/recipes/100036-312x231.jpg",
+    "calories": 520,
+    "readyInMinutes": 15
+  },
+  {
+    "id": 100037,
+    "title": "Zucchini Noodle Alfredo",
+    "image": "https://img.spoonacular.com/recipes/100037-312x231.jpg",
+    "calories": 410,
+    "readyInMinutes": 22
+  },
+  {
+    "id": 100038,
+    "title": "Teriyaki Tofu Stir-Fry",
+    "image": "https://img.spoonacular.com/recipes/100038-312x231.jpg",
+    "calories": 440,
+    "readyInMinutes": 25
+  },
+  {
+    "id": 100039,
+    "title": "Kale and Quinoa Salad",
+    "image": "https://img.spoonacular.com/recipes/100039-312x231.jpg",
+    "calories": 390,
+    "readyInMinutes": 20
+  },
+  {
+    "id": 100040,
+    "title": "Spicy Black Bean Soup",
+    "image": "https://img.spoonacular.com/recipes/100040-312x231.jpg",
+    "calories": 370,
+    "readyInMinutes": 30
+  },
+  {
+    "id": 100041,
+    "title": "Chicken Pesto Panini",
+    "image": "https://img.spoonacular.com/recipes/100041-312x231.jpg",
+    "calories": 530,
+    "readyInMinutes": 15
+  },
+  {
+    "id": 100042,
+    "title": "Roasted Butternut Squash Soup",
+    "image": "https://img.spoonacular.com/recipes/100042-312x231.jpg",
+    "calories": 360,
+    "readyInMinutes": 40
+  },
+  {
+    "id": 100043,
+    "title": "Chicken Tikka Masala",
+    "image": "https://img.spoonacular.com/recipes/100043-312x231.jpg",
+    "calories": 600,
+    "readyInMinutes": 35
+  },
+  {
+    "id": 100044,
+    "title": "Spicy Thai Noodle Bowl",
+    "image": "https://img.spoonacular.com/recipes/100044-312x231.jpg",
+    "calories": 490,
+    "readyInMinutes": 30
+  },
+  {
+    "id": 100045,
+    "title": "Pesto Zucchini Boats",
+    "image": "https://img.spoonacular.com/recipes/100045-312x231.jpg",
+    "calories": 420,
+    "readyInMinutes": 35
+  },
+  {
+    "id": 100046,
+    "title": "BBQ Tofu Bowl",
+    "image": "https://img.spoonacular.com/recipes/100046-312x231.jpg",
+    "calories": 460,
+    "readyInMinutes": 25
+  },
+  {
+    "id": 100047,
+    "title": "Lentil and Spinach Curry",
+    "image": "https://img.spoonacular.com/recipes/100047-312x231.jpg",
+    "calories": 430,
+    "readyInMinutes": 30
+  },
+  {
+    "id": 100048,
+    "title": "Chicken Avocado Burrito",
+    "image": "https://img.spoonacular.com/recipes/100048-312x231.jpg",
+    "calories": 560,
+    "readyInMinutes": 20
+  },
+  {
+    "id": 100049,
+    "title": "Vegetarian Lasagna",
+    "image": "https://img.spoonacular.com/recipes/100049-312x231.jpg",
+    "calories": 520,
+    "readyInMinutes": 45
+  },
+  {
+    "id": 100050,
+    "title": "Greek Chicken Bowl",
+    "image": "https://img.spoonacular.com/recipes/100050-312x231.jpg",
+    "calories": 550,
+    "readyInMinutes": 30
+  },
+  {
+    "id": 100051,
+    "title": "Avocado Toast with Egg",
+    "image": "https://img.spoonacular.com/recipes/100051-312x231.jpg",
+    "calories": 400,
+    "readyInMinutes": 10
+  },
+  {
+    "id": 100052,
+    "title": "Garlic Roasted Chickpeas",
+    "image": "https://img.spoonacular.com/recipes/100052-312x231.jpg",
+    "calories": 390,
+    "readyInMinutes": 20
+  },
+  {
+    "id": 100053,
+    "title": "Spicy Tuna Sushi Bowl",
+    "image": "https://img.spoonacular.com/recipes/100053-312x231.jpg",
+    "calories": 510,
+    "readyInMinutes": 25
+  },
+  {
+    "id": 100054,
+    "title": "Cauliflower Fried Rice",
+    "image": "https://img.spoonacular.com/recipes/100054-312x231.jpg",
+    "calories": 380,
+    "readyInMinutes": 20
+  },
+  {
+    "id": 100055,
+    "title": "Chili Lime Grilled Corn",
+    "image": "https://img.spoonacular.com/recipes/100055-312x231.jpg",
+    "calories": 320,
+    "readyInMinutes": 15
+  },
+  {
+    "id": 100056,
+    "title": "Baked Teriyaki Salmon",
+    "image": "https://img.spoonacular.com/recipes/100056-312x231.jpg",
+    "calories": 590,
+    "readyInMinutes": 25
+  },
+  {
+    "id": 100057,
+    "title": "Spaghetti Aglio e Olio",
+    "image": "https://img.spoonacular.com/recipes/100057-312x231.jpg",
+    "calories": 470,
+    "readyInMinutes": 20
+  },
+  {
+    "id": 100058,
+    "title": "Caprese Stuffed Portobello",
+    "image": "https://img.spoonacular.com/recipes/100058-312x231.jpg",
+    "calories": 430,
+    "readyInMinutes": 25
+  },
+  {
+    "id": 100059,
+    "title": "Sweet Potato Black Bean Enchiladas",
+    "image": "https://img.spoonacular.com/recipes/100059-312x231.jpg",
+    "calories": 510,
+    "readyInMinutes": 35
+  },
+  {
+    "id": 100060,
+    "title": "Egg Fried Quinoa",
+    "image": "https://img.spoonacular.com/recipes/100060-312x231.jpg",
+    "calories": 400,
+    "readyInMinutes": 20
+  },
+  {
+    "id": 100061,
+    "title": "Spinach Feta Turkey Burgers",
+    "image": "https://img.spoonacular.com/recipes/100061-312x231.jpg",
+    "calories": 530,
+    "readyInMinutes": 30
+  },
+  {
+    "id": 100062,
+    "title": "Vegan Chili",
+    "image": "https://img.spoonacular.com/recipes/100062-312x231.jpg",
+    "calories": 450,
+    "readyInMinutes": 40
+  },
+  {
+    "id": 100063,
+    "title": "Korean BBQ Beef Bowls",
+    "image": "https://img.spoonacular.com/recipes/100063-312x231.jpg",
+    "calories": 590,
+    "readyInMinutes": 30
+  },
+  {
+    "id": 100064,
+    "title": "Chickpea Avocado Salad",
+    "image": "https://img.spoonacular.com/recipes/100064-312x231.jpg",
+    "calories": 430,
+    "readyInMinutes": 15
+  },
+  {
+    "id": 100065,
+    "title": "Broccoli Stir Fry Noodles",
+    "image": "https://img.spoonacular.com/recipes/100065-312x231.jpg",
+    "calories": 460,
+    "readyInMinutes": 20
+  },
+  {
+    "id": 100066,
+    "title": "Peanut Butter Banana Oatmeal",
+    "image": "https://img.spoonacular.com/recipes/100066-312x231.jpg",
+    "calories": 380,
+    "readyInMinutes": 10
+  },
+  {
+    "id": 100067,
+    "title": "Creamy Avocado Pasta",
+    "image": "https://img.spoonacular.com/recipes/100067-312x231.jpg",
+    "calories": 470,
+    "readyInMinutes": 20
+  },
+  {
+    "id": 100068,
+    "title": "Roasted Veggie Wrap",
+    "image": "https://img.spoonacular.com/recipes/100068-312x231.jpg",
+    "calories": 420,
+    "readyInMinutes": 20
+  },
+  {
+    "id": 100069,
+    "title": "Chicken Pho Soup",
+    "image": "https://img.spoonacular.com/recipes/100069-312x231.jpg",
+    "calories": 520,
+    "readyInMinutes": 40
+  },
+  {
+    "id": 100070,
+    "title": "Mexican Street Corn Salad",
+    "image": "https://img.spoonacular.com/recipes/100070-312x231.jpg",
+    "calories": 400,
+    "readyInMinutes": 20
+  },
+  {
+    "id": 100071,
+    "title": "Zoodle Caprese Bowl",
+    "image": "https://img.spoonacular.com/recipes/100071-312x231.jpg",
+    "calories": 350,
+    "readyInMinutes": 15
+  },
+  {
+    "id": 100072,
+    "title": "Roasted Red Pepper Pasta",
+    "image": "https://img.spoonacular.com/recipes/100072-312x231.jpg",
+    "calories": 480,
+    "readyInMinutes": 25
+  },
+  {
+    "id": 100073,
+    "title": "Garlic Lemon Shrimp Bowl",
+    "image": "https://img.spoonacular.com/recipes/100073-312x231.jpg",
+    "calories": 510,
+    "readyInMinutes": 18
+  },
+  {
+    "id": 100074,
+    "title": "Crispy Tofu Wrap",
+    "image": "https://img.spoonacular.com/recipes/100074-312x231.jpg",
+    "calories": 470,
+    "readyInMinutes": 25
+  },
+  {
+    "id": 100075,
+    "title": "Hearty Lentil Stew",
+    "image": "https://img.spoonacular.com/recipes/100075-312x231.jpg",
+    "calories": 440,
+    "readyInMinutes": 45
+  },
+  {
+    "id": 100076,
+    "title": "Mango Chicken Salad",
+    "image": "https://img.spoonacular.com/recipes/100076-312x231.jpg",
+    "calories": 480,
+    "readyInMinutes": 20
+  },
+  {
+    "id": 100077,
+    "title": "Asian Slaw with Tofu",
+    "image": "https://img.spoonacular.com/recipes/100077-312x231.jpg",
+    "calories": 420,
+    "readyInMinutes": 15
+  },
+  {
+    "id": 100078,
+    "title": "Italian White Bean Soup",
+    "image": "https://img.spoonacular.com/recipes/100078-312x231.jpg",
+    "calories": 390,
+    "readyInMinutes": 35
+  },
+  {
+    "id": 100079,
+    "title": "Veggie Quesadilla",
+    "image": "https://img.spoonacular.com/recipes/100079-312x231.jpg",
+    "calories": 470,
+    "readyInMinutes": 20
+  },
+  {
+    "id": 100080,
+    "title": "Cilantro Lime Rice Bowl",
+    "image": "https://img.spoonacular.com/recipes/100080-312x231.jpg",
+    "calories": 430,
+    "readyInMinutes": 15
+  }
+]

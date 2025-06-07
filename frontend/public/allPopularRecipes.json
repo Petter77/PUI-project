@@ -1,0 +1,87 @@
+{
+  "offset": 10,
+  "number": 10,
+  "results": [
+    {
+      "id": 801101,
+      "title": "Zucchini Noodles with Pesto",
+      "image": "https://img.spoonacular.com/recipes/801101-312x231.jpg",
+      "imageType": "jpg",
+      "calories": 350,
+      "readyInMinutes": 20
+    },
+    {
+      "id": 801102,
+      "title": "Honey Garlic Glazed Salmon",
+      "image": "https://img.spoonacular.com/recipes/801102-312x231.jpg",
+      "imageType": "jpg",
+      "calories": 540,
+      "readyInMinutes": 25
+    },
+    {
+      "id": 801103,
+      "title": "Classic Margherita Pizza",
+      "image": "https://img.spoonacular.com/recipes/801103-312x231.jpg",
+      "imageType": "jpg",
+      "calories": 610,
+      "readyInMinutes": 30
+    },
+    {
+      "id": 801104,
+      "title": "BBQ Pulled Jackfruit Sandwiches",
+      "image": "https://img.spoonacular.com/recipes/801104-312x231.jpg",
+      "imageType": "jpg",
+      "calories": 450,
+      "readyInMinutes": 35
+    },
+    {
+      "id": 801105,
+      "title": "Spaghetti Squash with Tomato Sauce",
+      "image": "https://img.spoonacular.com/recipes/801105-312x231.jpg",
+      "imageType": "jpg",
+      "calories": 300,
+      "readyInMinutes": 28
+    },
+    {
+      "id": 801106,
+      "title": "Creamy Avocado Pasta",
+      "image": "https://img.spoonacular.com/recipes/801106-312x231.jpg",
+      "imageType": "jpg",
+      "calories": 390,
+      "readyInMinutes": 15
+    },
+    {
+      "id": 801107,
+      "title": "Mediterranean Stuffed Peppers",
+      "image": "https://img.spoonacular.com/recipes/801107-312x231.jpg",
+      "imageType": "jpg",
+      "calories": 520,
+      "readyInMinutes": 40
+    },
+    {
+      "id": 801108,
+      "title": "Chili Lime Grilled Shrimp Skewers",
+      "image": "https://img.spoonacular.com/recipes/801108-312x231.jpg",
+      "imageType": "jpg",
+      "calories": 470,
+      "readyInMinutes": 18
+    },
+    {
+      "id": 801109,
+      "title": "Lentil & Spinach Curry",
+      "image": "https://img.spoonacular.com/recipes/801109-312x231.jpg",
+      "imageType": "jpg",
+      "calories": 430,
+      "readyInMinutes": 32
+    },
+    {
+      "id": 801110,
+      "title": "Chicken Alfredo with Broccoli",
+      "image": "https://img.spoonacular.com/recipes/801110-312x231.jpg",
+      "imageType": "jpg",
+      "calories": 620,
+      "readyInMinutes": 27
+    }
+  ],
+  "totalResults": 86
+}
