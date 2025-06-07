@@ -125,7 +125,10 @@ function Dashboard() {
             message={message}
             setButtonClicked={setButtonClicked}
           />
-          <RecipesAll allRecipes={allRecipes} title="All recipes" message={message} />
+          <RecipesAll 
+            allRecipes={allRecipes} 
+            title="All recipes" 
+            message={message} />
         </>
       ) : (
         <>

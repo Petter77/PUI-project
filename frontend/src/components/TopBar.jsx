@@ -1,14 +1,8 @@
 import { useNavigate } from 'react-router-dom';
 import { User, UtensilsCrossed, Menu } from 'lucide-react';
 
-const TopBar = ({ userToken, setUserToken, user, toggleSidebar }) => {
+const TopBar = ({ userToken, user, toggleSidebar }) => {
   const navigate = useNavigate();
-
-  const handleLogout = () => {
-    sessionStorage.removeItem('user');
-    setUserToken(null);
-    navigate('/');
-  };
 
   return (
     <header className="bg-white text-black shadow-md w-full sticky top-0 z-50 px-6 py-4 flex items-center justify-between relative">
@@ -28,20 +22,12 @@ const TopBar = ({ userToken, setUserToken, user, toggleSidebar }) => {
       {/* Prawy panel */}
       <div className="flex items-center space-x-6 min-w-[120px] justify-end">
         {userToken ? (
-          <>
-            {user && (
-              <div className="flex items-center space-x-2">
-                <User size={20} strokeWidth={2} />
-                <span className="text-sm font-semibold">{user.username}</span>
-              </div>
-            )}
-            <button
-              onClick={handleLogout}
-              className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg text-sm transition-all"
-            >
-              Wyloguj się
-            </button>
-          </>
+          user && (
+            <div className="flex items-center space-x-2">
+              <User size={20} strokeWidth={2} />
+              <span className="text-sm font-semibold">{user.username}</span>
+            </div>
+          )
         ) : (
           <>
             <button

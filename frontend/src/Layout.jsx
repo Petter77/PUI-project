@@ -20,7 +20,11 @@ const Layout = ({ userToken, setUserToken, user }) => {
       />
 
       <div className="flex flex-1">
-        <SideBar user={user} isOpen={isSidebarOpen} />
+        <SideBar  
+          user={user} 
+          isOpen={isSidebarOpen}
+          setUserToken={setUserToken}
+        />
         <main className="flex-1 p-6 overflow-y-auto">
           <Outlet />
         </main>
