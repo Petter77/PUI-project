@@ -1,17 +1,16 @@
 import { useState } from "react";
 
-function SearchInput() {
+function SearchInput({ onSearch }) {
   const [inputValue, setInputValue] = useState("");
 
   const handleSearch = async (e) => {
     e.preventDefault();
-    // Logika wyszukiwania tutaj
-    console.log("Searching for:", inputValue);
+    onSearch(inputValue);
   };
 
   return (
-    <form 
-      onSubmit={handleSearch} 
+    <form
+      onSubmit={handleSearch}
       className="flex items-center gap-4 max-w-xl mx-auto mb-20"
     >
       <input
