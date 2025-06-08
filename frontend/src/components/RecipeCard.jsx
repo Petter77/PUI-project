@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import RecipeModal from "./RecipeModal";
 
-function RecipeCard({ recipe, source = "api", onDelete }) {
+function RecipeCard({ recipe, source = "api", onDelete, handleAddToMealPlan }) {
   const [isCardClicked, setIsCardClicked] = useState(false);
 
   const closeModal = () => {
@@ -62,7 +62,8 @@ function RecipeCard({ recipe, source = "api", onDelete }) {
           recipeID={recipe.id || recipe.ApiRecipeID}
           closeModal={closeModal}
           source={source}
-          savedRecipe={source === "saved" ? recipe : null}
+          savedRecipe={ (source === "saved" || source === "mealPlan") ? recipe : null }
+          handleAddToMealPlan={handleAddToMealPlan} // upewnij się, że jest przekazywane
         />
       )}
     </>

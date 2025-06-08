@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Heart, HeartOff, X } from "lucide-react";
 import axios from "axios";
 
-const RecipeModal = ({ recipeID, closeModal, source = "api", savedRecipe = null }) => {
+const RecipeModal = ({ recipeID, closeModal, source = "api", savedRecipe = null, handleAddToMealPlan }) => {
   const [recipe, setRecipe] = useState(null);
   const [loading, setLoading] = useState(true);
   const [isFavorite, setIsFavorite] = useState(false);
@@ -17,28 +17,29 @@ const RecipeModal = ({ recipeID, closeModal, source = "api", savedRecipe = null 
     },
   };
 
-  const getDetailsRecipe = async () => {
-    setLoading(true);
-    try {
-      if (source === "saved" && savedRecipe) {
-        // Dane są już w propsie, więc nie fetchujemy
-        setRecipe(savedRecipe);
-      } else {
-        // Fetch z API 
-        const response = await fetch(
-          `https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/${recipeID}/information`,
-          API_HEADERS
-        );
-        if (!response.ok) throw new Error("Failed to fetch recipe details");
-        const data = await response.json();
-        setRecipe(data);
-      }
-    } catch (error) {
-      console.error("Błąd pobierania przepisu:", error);
-    } finally {
-      setLoading(false);
+const getDetailsRecipe = async () => {
+  setLoading(true);
+  try {
+    if ((source === "saved" || source === "mealPlan") && savedRecipe) {
+      // Jeśli mamy przepis w propsie (zapisany lub z planu posiłków), używamy go bez fetchowania
+      setRecipe(savedRecipe);
+    } else {
+      // Fetch z API dla innych przypadków (np. source === "api")
+      const response = await fetch(
+        `https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/${recipeID}/information`,
+        API_HEADERS
+      );
+      if (!response.ok) throw new Error("Failed to fetch recipe details");
+      const data = await response.json();
+      setRecipe(data);
     }
-  };
+  } catch (error) {
+    console.error("Błąd pobierania przepisu:", error);
+  } finally {
+    setLoading(false);
+  }
+};
+
 
   const checkIfFavorite = async () => {
     try {
@@ -223,29 +224,38 @@ const RecipeModal = ({ recipeID, closeModal, source = "api", savedRecipe = null 
           />
         </div>
 
-        {source !== "saved" && (
-                  <button
-          disabled={favLoading}
-          onClick={toggleFavorite}
-          className={`w-full py-2 rounded-lg font-semibold ${
-            isFavorite
-              ? "bg-gray-300 hover:bg-gray-400 text-gray-700"
-              : "bg-red-500  hover:bg-red-600 text-white"
-          } transition-colors duration-300`}
-        >
-          {isFavorite ? (
-            <div className="flex items-center justify-center gap-2">
-              <HeartOff size={20} />
-              Usuń z ulubionych
-            </div>
-          ) : (
-            <div className="flex items-center justify-center gap-2">
-              <Heart size={20} />
-              Dodaj do ulubionych
-            </div>
-          )}
-        </button>
-        )}
+            {source === "mealPlan" ? (
+  <button
+ onClick={() => {handleAddToMealPlan && handleAddToMealPlan(recipe)}}
+    className="w-full py-2 rounded-lg font-semibold bg-green-500 hover:bg-green-600 text-white transition-colors duration-300"
+  >
+    Dodaj do planu żywieniowego
+  </button>
+) : (
+  source !== "saved" && (
+    <button
+      disabled={favLoading}
+      onClick={toggleFavorite}
+      className={`w-full py-2 rounded-lg font-semibold ${
+        isFavorite
+          ? "bg-gray-300 hover:bg-gray-400 text-gray-700"
+          : "bg-red-500 hover:bg-red-600 text-white"
+      } transition-colors duration-300`}
+    >
+      {isFavorite ? (
+        <div className="flex items-center justify-center gap-2">
+          <HeartOff size={20} />
+          Usuń z ulubionych
+        </div>
+      ) : (
+        <div className="flex items-center justify-center gap-2">
+          <Heart size={20} />
+          Dodaj do ulubionych
+        </div>
+      )}
+    </button>
+  )
+)}
 
       </div>
     </div>
