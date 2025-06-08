@@ -12,7 +12,7 @@ function MealPlanSelectList({handleAddToMealPlan, onClose}) {
 
     const handleSelectRecipe = (recipe) => {
     handleAddToMealPlan(recipe);
-    if (onClose) onClose(); // zamknij modal po wyborze
+    onClose(); // zamknij modal po wyborze
   };
 
   const getLoggedUser = async () => {
@@ -86,7 +86,6 @@ function MealPlanSelectList({handleAddToMealPlan, onClose}) {
           onClick={() => handleSelectRecipe(recipe)}
         >
           <RecipeCard recipe={recipe} source="mealPlan" />
-          <button onClick={() => handleSelectRecipe(recipe)}>Dodaj do planu</button>
         </div>
       ))}
         </div>

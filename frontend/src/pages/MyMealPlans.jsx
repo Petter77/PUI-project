@@ -1,21 +1,58 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import MealPlanSelectList from "../components/MealPlanSelectList";
 import axios from "axios";
 
 function MyMealPlans() {
     const token = sessionStorage.getItem("user");
-
     const [dailyMealPlan, setDailyMealPlan] = useState([]);
     const [isShowSelectList, setIsShowSelectList] = useState(false);
     const [selectedDay, setSelectedDay] = useState(null);
     const [selectedMealType, setSelectedMealType] = useState(null);
-    const [user, setUser] = useState(null);
     const [activeRecipe, setActiveRecipe] = useState(null);
+
+    // Funkcja do zamykania modala (będzie przekazywana)
+    const closeMealPlanSelectModal = () => {
+        setIsShowSelectList(false);
+        setSelectedDay(null); // Resetowanie wybranych danych po zamknięciu
+        setSelectedMealType(null);
+    };
+
+    // Dodano sobotę i niedzielę
+    const days = ["Poniedziałek", "Wtorek", "Środa", "Czwartek", "Piątek", "Sobota", "Niedziela"];
+    const mealTypes = ["Śniadanie", "I-danie", "II-danie", "Kolacja"];
+
+    const calculateAverageHealthScore = (recipes) => {
+        if (!recipes.length) return 0;
+        const total = recipes.reduce((sum, r) => sum + (r.healthScore || 0), 0);
+        return (total / recipes.length).toFixed(1);
+    };
+
+    const dailyHealthScores = useMemo(() => {
+        return days.map((day) => {
+            const recipes = dailyMealPlan.filter((r) => r.day === day);
+            return { day, average: calculateAverageHealthScore(recipes) };
+        });
+    }, [dailyMealPlan, days]);
+
+    const weeklyAverageHealthScore = useMemo(() => {
+        return calculateAverageHealthScore(dailyMealPlan);
+    }, [dailyMealPlan]);
 
     const handleAddToMealPlan = async (recipe) => {
         if (!selectedDay || !selectedMealType) return;
-
-        const enrichedRecipe = { ...recipe, day: selectedDay, meal_type: selectedMealType };
+        
+        const enrichedRecipe = { 
+            ...recipe, 
+            day: selectedDay, 
+            meal_type: selectedMealType,
+            // Fallback for instructions, image, calories, healthScore, prepTime, servings
+            instructions: recipe.instructions || "Brak szczegółowych instrukcji dla tego przepisu.",
+            image: recipe.image || "https://via.placeholder.com/400x250.png?text=Brak+zdjęcia",
+            calories: recipe.calories || 0,
+            healthScore: recipe.healthScore || 0,
+            prepTime: recipe.prepTime || "brak danych",
+            servings: recipe.servings || "brak danych"
+        };
 
         try {
             const response = await fetch("http://localhost:3000/meals/plan", {
@@ -29,59 +66,37 @@ function MyMealPlans() {
 
             if (!response.ok) {
                 const errorData = await response.json();
-                // Rzuć błąd, który zostanie złapany i wyświetlony użytkownikowi
                 throw new Error(errorData.error || "Błąd podczas dodawania do planu posiłków");
             }
 
-            const data = await response.json();
-            console.log("Dodano do planu:", data);
-            // Po udanym dodaniu, odśwież plan posiłków, aby pobrać rekord z poprawnym ID z bazy danych
             await handleGetMealsPlan();
         } catch (error) {
             console.error("Błąd:", error.message);
-            alert(error.message); // Wyświetl błąd użytkownikowi
         }
 
-        setIsShowSelectList(false);
-        setSelectedDay(null);
-        setSelectedMealType(null);
+        // closeMealPlanSelectModal(); // Zamykamy modal po dodaniu przepisu
+        // UWAGA: Ta linia będzie przeniesiona do handleSelectRecipe w MealPlanSelectList
+        // tak aby zamykanie modalu nastąpiło tylko po faktycznym wyborze przepisu.
+        // Jeśli chcemy, żeby modal zamykał się zawsze, nawet jak nie dodamy,
+        // to można pozostawić to tutaj, ale lepiej obsłużyć w child komponencie.
     };
 
     const handleGetMealsPlan = async () => {
         try {
-            const response = await axios.get(`http://localhost:3000/meals/plan`, {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
+            const response = await axios.get("http://localhost:3000/meals/plan", {
+                headers: { Authorization: `Bearer ${token}` },
             });
             setDailyMealPlan(response.data);
-            console.log("Pobrany plan posiłków:", response.data);
         } catch (error) {
-            console.error("Błąd pobierania zapisanych przepisów:", error);
+            console.error("Błąd pobierania planu:", error);
         }
     };
 
-    const getLoggedUser = async () => {
+    const handleRemoveFromMealPlan = async (id) => {
         try {
-            const response = await axios.get("http://localhost:3000/auth/logged", {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
-            });
-            setUser(response.data);
-        } catch (error) {
-            console.error("Błąd pobierania danych użytkownika:", error);
-            setUser(null);
-        }
-    };
-
-    const handleRemoveFromMealPlan = async (recipeDbId) => {
-        try {
-            const response = await fetch(`http://localhost:3000/meals/plan/${recipeDbId}`, {
+            const response = await fetch(`http://localhost:3000/meals/plan/${id}`, {
                 method: "DELETE",
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
+                headers: { Authorization: `Bearer ${token}` },
             });
 
             if (!response.ok) {
@@ -89,166 +104,186 @@ function MyMealPlans() {
                 throw new Error(errorData.error || "Błąd podczas usuwania przepisu z planu.");
             }
 
-            setDailyMealPlan((prev) =>
-                prev.filter((r) => r.id !== recipeDbId)
-            );
-
-            if (activeRecipe && activeRecipe.id === recipeDbId) {
-                setActiveRecipe(null);
-            }
-
-            console.log("Przepis usunięty z planu.");
+            setDailyMealPlan((prev) => prev.filter((r) => r.id !== id));
+            if (activeRecipe?.id === id) setActiveRecipe(null);
         } catch (error) {
-            console.error("Błąd podczas usuwania z planu:", error.message);
-            alert(error.message); // Wyświetl błąd użytkownikowi
+            console.error("Błąd usuwania przepisu:", error.message);
         }
     };
 
-    const days = ["Poniedziałek", "Wtorek", "Środa", "Czwartek", "Piątek"];
-    const mealTypes = ["Śniadanie", "I-danie", "II-danie", "Kolacja"];
-
     useEffect(() => {
-        getLoggedUser();
         handleGetMealsPlan();
     }, []);
 
     return (
-        <>
+        <div className="p-6 bg-gray-50 min-h-screen">
+            <h2 className="text-3xl font-bold mb-6 text-center text-gray-800">
+                Twój <span className="text-blue-600">tygodniowy</span> plan posiłków
+            </h2>
+
+            {/* HealthScore summary */}
+            <div className="bg-white shadow-md rounded-2xl p-6 mb-8">
+                <h3 className="text-xl font-bold text-gray-800 mb-4">Podsumowanie HealthScore</h3>
+                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-7 gap-4">
+                    {dailyHealthScores.map(({ day, average }) => (
+                        <div key={day} className="bg-blue-50 rounded-xl p-4 text-center shadow-sm">
+                            <p className="text-sm font-semibold text-gray-600">{day}</p>
+                            <p className="text-2xl font-bold text-blue-600">{average} / 100</p>
+                        </div>
+                    ))}
+                </div>
+                <div className="mt-6 text-center text-lg font-semibold bg-blue-600 text-white py-3 rounded-xl shadow">
+                    Średni HealthScore tygodnia: {weeklyAverageHealthScore} / 100
+                </div>
+            </div>
+
+            {/* Główny układ gridu */}
+            <div 
+                className="grid gap-6" 
+                style={{ 
+                    gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))' 
+                }}
+            >
+                {days.map((day) => (
+                    <div key={day} className="bg-white shadow rounded-2xl p-4 flex flex-col">
+                        <h3 className="text-center font-bold text-gray-700 text-lg mb-3">{day}</h3>
+                        {mealTypes.map((mealType) => {
+                            const recipe = dailyMealPlan.find(
+                                (r) => r.day === day && r.meal_type === mealType
+                            );
+                            return (
+                                <div key={mealType} className="mb-3">
+                                    {!recipe ? (
+                                        <button
+                                            className="w-full bg-blue-100 hover:bg-blue-200 text-blue-600 py-2 rounded-xl text-sm font-medium"
+                                            onClick={() => {
+                                                setSelectedDay(day);
+                                                setSelectedMealType(mealType);
+                                                setIsShowSelectList(true);
+                                            }}
+                                        >
+                                            + Dodaj {mealType.toLowerCase()}
+                                        </button>
+                                    ) : (
+                                        <div
+                                            onClick={() => setActiveRecipe(recipe)}
+                                            className="p-3 bg-blue-50 hover:bg-blue-100 rounded-xl shadow-sm cursor-pointer transition-all group"
+                                        >
+                                            <p className="font-semibold text-gray-800 group-hover:text-blue-700 truncate">
+                                                {recipe.title || recipe.name}
+                                            </p>
+                                            <div className="flex justify-between mt-1 text-sm text-gray-600">
+                                                {/* Wyświetlanie kalorii w skróconym widoku */}
+                                                <span>{recipe.calories ? `${Math.round(recipe.calories)} kcal` : 'N/A kcal'}</span>
+                                                <button
+                                                    onClick={(e) => {
+                                                        e.stopPropagation();
+                                                        handleRemoveFromMealPlan(recipe.id);
+                                                    }}
+                                                    className="text-red-500 hover:text-red-700 font-medium"
+                                                >
+                                                    Usuń
+                                                </button>
+                                            </div>
+                                        </div>
+                                    )}
+                                </div>
+                            );
+                        })}
+                    </div>
+                ))}
+            </div>
+
+            {/* Modal: Add recipe - ZMIANY TUTAJ */}
             {isShowSelectList && (
                 <div
-                    className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50"
-                    onClick={() => {
-                        setIsShowSelectList(false);
-                        setSelectedDay(null);
-                        setSelectedMealType(null);
-                    }}
+                    className="fixed inset-0 z-50 bg-black bg-opacity-40 flex items-center justify-center"
+                    onClick={closeMealPlanSelectModal} 
                 >
                     <div
-                        className="bg-white rounded-xl shadow-lg p-6 w-full max-w-5xl max-h-[90vh] overflow-y-auto relative"
+                        className="bg-white rounded-2xl p-6 max-w-4xl w-full max-h-[90vh] overflow-y-auto relative"
                         onClick={(e) => e.stopPropagation()}
                     >
+                        {/* Przycisk zamknięcia w tym modalu również powinien używać closeMealPlanSelectModal */}
                         <button
-                            onClick={() => {
-                                setIsShowSelectList(false);
-                                setSelectedDay(null);
-                                setSelectedMealType(null);
-                            }}
-                            className="absolute top-4 right-4 text-gray-500 hover:text-gray-800 text-2xl font-bold"
+                            onClick={closeMealPlanSelectModal}
+                            className="absolute top-4 right-4 text-gray-500 text-2xl"
                         >
                             &times;
                         </button>
-                        <MealPlanSelectList handleAddToMealPlan={handleAddToMealPlan} />
+                        {/* Przekazujemy handleAddToMealPlan i closeMealPlanSelectModal do MealPlanSelectList */}
+                        <MealPlanSelectList 
+                            handleAddToMealPlan={handleAddToMealPlan} 
+                            onClose={closeMealPlanSelectModal} 
+                        />
                     </div>
                 </div>
             )}
 
+            {/* Modal: Recipe detail - BEZ ZMIAN W ZAMYKANIU */}
             {activeRecipe && (
                 <div
-                    className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50"
+                    className="fixed inset-0 z-50 bg-black bg-opacity-40 flex items-center justify-center"
                     onClick={() => setActiveRecipe(null)}
                 >
                     <div
-                        className="bg-white rounded-xl shadow-lg p-6 w-full max-w-3xl max-h-[90vh] overflow-y-auto relative"
+                        className="bg-white rounded-2xl p-6 max-w-xl w-full max-h-[90vh] overflow-y-auto relative"
                         onClick={(e) => e.stopPropagation()}
                     >
+                        {/* Przycisk zamykania - przywrócono pierwotne klasy */}
                         <button
-                            onClick={() => setActiveRecipe(null)}
-                            className="absolute top-4 right-4 text-gray-500 hover:text-gray-800 text-2xl font-bold"
+                            onClick={() => setActiveRecipe(null)} // Ten modal zamyka się przez setActiveRecipe(null)
+                            className="absolute top-0 right-0 text-gray-800 text-4xl" // Poprawiłem na text-gray-800
                         >
                             &times;
                         </button>
 
-                        <h2 className="text-2xl font-bold mb-4">{activeRecipe.title || activeRecipe.name}</h2>
-                        {activeRecipe.image && (
+                        {/* Zdjęcie przepisu */}
+                        {activeRecipe.image ? (
                             <img
                                 src={activeRecipe.image}
-                                alt={activeRecipe.title || activeRecipe.name}
-                                className="w-full max-h-64 object-cover rounded mb-4"
+                                alt={activeRecipe.title || "Zdjęcie przepisu"}
+                                className="w-full h-64 object-cover rounded-xl mb-4" 
                             />
+                        ) : (
+                            <div className="w-full h-64 bg-gray-200 rounded-xl mb-4 flex items-center justify-center text-gray-500 font-semibold text-lg">
+                                Brak dostępnego zdjęcia
+                            </div>
                         )}
-                        <p><strong>Instrukcje:</strong></p>
-                        <p className="whitespace-pre-wrap mb-4">{activeRecipe.instructions}</p>
-                        <p><strong>Składniki:</strong></p>
-                        <ul className="list-disc list-inside mb-4">
-                            {activeRecipe.ingredients?.map((ing, idx) => (
-                                <li key={idx}>{ing.name || ing}</li>
-                            ))}
+
+                        {/* Tytuł i opis - przywrócono niebieski kolor tytułu */}
+                        <h3 className="text-2xl font-bold mb-2 text-blue-600"> {/* Zmieniłem text-black-600 na text-blue-600 */}
+                            {activeRecipe.title || activeRecipe.name || "Brak tytułu"}
+                        </h3>
+                        <p className="mb-4 text-gray-700 whitespace-pre-line">
+                            {activeRecipe.instructions || "Brak szczegółowych instrukcji dla tego przepisu."}
+                        </p>
+
+                        {/* Składniki */}
+                        <h4 className="text-lg font-semibold mb-2 text-gray-800">Składniki:</h4>
+                        <ul className="list-disc list-inside space-y-1 text-gray-600 mb-4">
+                            {activeRecipe.ingredients && activeRecipe.ingredients.length > 0 ? (
+                                activeRecipe.ingredients.map((ing, idx) => (
+                                    <li key={idx}>{ing.name || ing}</li>
+                                ))
+                            ) : (
+                                <li>Brak dostępnych składników.</li>
+                            )}
                         </ul>
-                        <p><strong>Czas przygotowania:</strong> {activeRecipe.prepTime || "brak danych"} min</p>
-                        <p><strong>Porcje:</strong> {activeRecipe.servings || "brak danych"}</p>
-                        <p><strong>Kalorie:</strong> {activeRecipe.calories || "brak danych"}</p>
-                        <p><strong>Health Score:</strong> {activeRecipe.healthScore || "brak danych"}</p>
+
+                        {/* Szczegóły dodatkowe - przywrócono format listy */}
+                        <ul className="list-disc list-inside space-y-1 text-gray-600">
+                            <li><strong>Kalorie:</strong> {Math.round(activeRecipe.calories || 0)} kcal</li>
+                            <li><strong>HealthScore:</strong> {activeRecipe.healthScore || "Brak"} / 100</li>
+                            <li><strong>Czas przygotowania:</strong> {activeRecipe.prepTime || "brak danych"} min</li>
+                            <li><strong>Porcje:</strong> {activeRecipe.servings || "brak danych"}</li>
+                            <li><strong>Typ posiłku:</strong> {activeRecipe.meal_type || "brak danych"}</li>
+                            <li><strong>Dzień:</strong> {activeRecipe.day || "brak danych"}</li>
+                        </ul>
                     </div>
                 </div>
             )}
-
-            <div className="p-4">
-                <h2 className="text-xl font-bold mb-4">Twój plan posiłków:</h2>
-
-                <ul>
-                    {days.map((day) => (
-                        <li key={day} className="mb-6">
-                            <strong className="text-lg">{day}</strong>
-                            <ul className="ml-4 mt-2 space-y-4">
-                                {mealTypes.map((mealType) => {
-                                    const hasRecipe = dailyMealPlan.some(
-                                        (r) => r.day === day && r.meal_type === mealType
-                                    );
-                                    return (
-                                        <li key={mealType}>
-                                            <div className="flex items-center justify-between mb-1">
-                                                <span className="font-semibold">{mealType}</span>
-                                                <button
-                                                    className={`px-2 py-1 text-white rounded text-sm ${
-                                                        hasRecipe
-                                                            ? "bg-gray-400 cursor-not-allowed"
-                                                            : "bg-blue-600 hover:bg-blue-700"
-                                                    }`}
-                                                    onClick={() => {
-                                                        setSelectedDay(day);
-                                                        setSelectedMealType(mealType);
-                                                        setIsShowSelectList(true);
-                                                    }}
-                                                    disabled={hasRecipe} // Dezaktywuj, jeśli już jest przepis
-                                                >
-                                                    {hasRecipe ? "Przepis dodany" : "Dodaj przepis"}
-                                                </button>
-                                            </div>
-
-                                            <ul className="ml-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-                                                {dailyMealPlan
-                                                    .filter((r) => r.day === day && r.meal_type === mealType)
-                                                    .map((r) => (
-                                                        <li
-                                                            key={r.id}
-                                                            className="bg-gray-100 p-3 rounded cursor-pointer hover:bg-gray-200 flex justify-between items-center"
-                                                            onClick={() => setActiveRecipe(r)}
-                                                        >
-                                                            <span>{r.title || r.name}</span>
-                                                            <button
-                                                                onClick={(e) => {
-                                                                    e.stopPropagation();
-                                                                    handleRemoveFromMealPlan(r.id);
-                                                                }}
-                                                                className="text-red-600 hover:underline text-sm ml-2"
-                                                            >
-                                                                Usuń
-                                                            </button>
-                                                        </li>
-                                                    ))}
-                                                {!hasRecipe && ( // Wyświetl "Brak przepisów" tylko jeśli nie ma żadnego
-                                                    <li className="text-gray-500 italic col-span-full">Brak przepisów</li>
-                                                )}
-                                            </ul>
-                                        </li>
-                                    );
-                                })}
-                            </ul>
-                        </li>
-                    ))}
-                </ul>
-            </div>
-        </>
+        </div>
     );
 }
 
