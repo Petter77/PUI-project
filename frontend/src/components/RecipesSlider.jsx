@@ -23,7 +23,7 @@ import React from 'react';
    },
   });
 
-  if (!results) return <p>Ładowanie...</p>;
+  if (!results) return;
   if (message) return <p>{message}</p>;
 
   return (

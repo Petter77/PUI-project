@@ -1,73 +1,79 @@
-import { useState, useEffect } from "react";
+import React, { useState } from "react";
+import { Heart, HeartOff, Trash2 } from "lucide-react"; // Importuj Trash2
 import RecipeModal from "./RecipeModal";
 
-function RecipeCard({ recipe, source = "api", onDelete, handleAddToMealPlan }) {
-  const [isCardClicked, setIsCardClicked] = useState(false);
+const RecipeCard = ({ recipe, source, showDelete, onDelete, isFavoriteProp }) => {
+  const [showModal, setShowModal] = useState(false);
+  const [isFavorite, setIsFavorite] = useState(isFavoriteProp !== undefined ? isFavoriteProp : (source === "saved" || source === "mealPlan"));
 
-  const closeModal = () => {
-    setIsCardClicked(false);
+  const openModal = () => {
+    setShowModal(true);
   };
 
-  useEffect(() => {
-    document.body.style.overflow = isCardClicked ? "hidden" : "auto";
-  }, [isCardClicked]);
+  const closeModal = () => {
+    setShowModal(false);
+  };
+
+  const handleToggleFavorite = () => {
+    setIsFavorite(!isFavorite);
+    // Tutaj możesz wywołać funkcję z propsów, jeśli RecipeCard ma obsługiwać logikę ulubionych
+    // np. onToggleFavorite(recipe.id, !isFavorite);
+  };
 
   const handleDeleteClick = (e) => {
-    e.stopPropagation(); // zapobiega otwarciu modala
-    if (onDelete) {
-      onDelete(recipe.ApiRecipeID);
-    }
+    e.stopPropagation(); // Zapobiega otwarciu modala po kliknięciu przycisku usuwania
+    // Wywołaj funkcję onDelete bezpośrednio, bez alertu
+    onDelete(recipe.ApiRecipeID || recipe.id); // Upewnij się, że przekazujesz odpowiednie ID
   };
 
   return (
     <>
       <div
-        key={recipe.id || recipe.ApiRecipeID}
-        className="keen-slider__slide flex justify-center cursor-pointer relative"
-        onClick={() => setIsCardClicked(true)}
+        className="keen-slider__slide flex justify-center cursor-pointer relative p-2"
+        onClick={openModal} // Otwórz modal po kliknięciu na kartę
       >
-        {source === "saved" && (
-          <button
-            onClick={handleDeleteClick}
-            className="absolute top-2 left-2 z-10 bg-white rounded-full p-1 shadow hover:bg-red-100"
-            aria-label="Usuń przepis"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="w-5 h-5 text-red-600"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              strokeWidth={2}
-            >
-              <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-            </svg>
-          </button>
-        )}
-
-        <div className="w-full max-w-[14rem] sm:max-w-[15rem] md:max-w-[16rem] h-[14rem] sm:h-[16rem] md:h-[18rem] bg-white rounded-xl shadow-md flex flex-col items-center hover:scale-105 transition-transform duration-300">
+        <div className="w-full max-w-[15rem] h-[18rem] bg-white rounded-2xl shadow-lg flex flex-col items-center overflow-hidden transition-transform duration-300 hover:scale-105 hover:shadow-xl">
+          {/* Obrazek przepisu */}
           <img
-            src={recipe.image}
+            src={recipe.image || "https://via.placeholder.com/150"} // Domyślny obrazek
             alt={recipe.title}
-            className="w-full h-32 object-cover rounded-md mb-2"
+            className="w-full h-36 object-cover rounded-t-2xl"
           />
-          <h2 className="text-lg font-bold text-black text-left px-2 py-1 mb-2 line-clamp-2">
-            {recipe.title}
-          </h2>
+
+          {/* Tytuł przepisu */}
+          <div className="flex flex-col flex-grow items-start justify-between p-3 w-full">
+            <h3 className="text-lg font-semibold text-gray-800 text-left mb-2 line-clamp-2">
+              {recipe.title}
+            </h3>
+          </div>
+        </div>
+
+        {/* Przyciski akcji (ulubione, usuń) - pozycjonowane absolutnie na karcie */}
+        <div className="absolute top-4 right-4 flex gap-2">
+
+
+          {/* Przycisk usuwania (jeśli showDelete jest true) */}
+          {showDelete && (
+            <button
+              onClick={handleDeleteClick} // Wywołaj nową funkcję handleDeleteClick
+              className="p-2 rounded-full bg-red-500 text-white shadow-md hover:cursor-pointer hover:bg-red-600 transition-colors duration-300"
+            >
+              <Trash2 size={20} /> {/* Ikona kosza */}
+            </button>
+          )}
         </div>
       </div>
 
-      {isCardClicked && (
+      {showModal && (
         <RecipeModal
-          recipeID={recipe.id || recipe.ApiRecipeID}
+          recipeID={recipe.ApiRecipeID || recipe.id} // Użyj ApiRecipeID dla zapisanych, id dla API
           closeModal={closeModal}
           source={source}
-          savedRecipe={ (source === "saved" || source === "mealPlan") ? recipe : null }
-          handleAddToMealPlan={handleAddToMealPlan} // upewnij się, że jest przekazywane
+          savedRecipe={source === "saved" ? recipe : null} // Przekaż cały obiekt przepisu dla 'saved'
         />
       )}
     </>
   );
-}
+};
 
 export default RecipeCard;

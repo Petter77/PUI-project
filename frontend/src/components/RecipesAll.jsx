@@ -5,7 +5,7 @@ import RecipeCard from './RecipeCard';
 function RecipesAll({ allRecipes, title, currentPage, totalResults, resultsPerPage, onPageChange, showLoadMoreButton = false }) {
   // Komunikat ładowania tylko dla tej sekcji
   if (!allRecipes) {
-    return <p className="text-center mt-4">Ładowanie przepisów {title.toLowerCase()}...</p>;
+    return;
   }
 
   if (allRecipes.length === 0 && totalResults === 0) {
